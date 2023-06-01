@@ -18,7 +18,7 @@ use App\Http\Controllers\EtudiantController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 // Route::get('/dashboard', function () {
@@ -28,20 +28,10 @@ Route::get('/', function () {
 Route::get('/dashboard', [DashbordController::class,'logincontrole'])->middleware(['auth', 'verified'])->name('dashboard');
 //////////////// prof /////////////////////////
 Route::get('/prof/dashboard', [ProfController::class,'index'])->name('prof');
-
-
-
 //////////////// prof //////////////////////////
-
-
 //////////////// etudiant /////////////////////////
 Route::get('/etudiant/dashboard', [EtudiantController::class,'index'])->name('etudiant');
-
-
-
 //////////////// etudiant //////////////////////////
-
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
