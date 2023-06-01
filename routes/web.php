@@ -28,7 +28,7 @@ Route::get('/', function () {
 Route::get('/dashboard', [DashbordController::class,'logincontrole'])->middleware(['auth', 'verified'])->name('dashboard');
 //////////////// prof /////////////////////////
 Route::get('/prof/dashboard', [ProfController::class,'index'])->name('prof');
-
+Route::get('/add/etudiant', [ProfController::class,'addetudiant'])->name('etudiant.add');
 
 
 //////////////// prof //////////////////////////
