@@ -89,24 +89,29 @@
                     <th scope="col">First Name</th>
                     <th scope="col">Last Name</th>
                     <th scope="col">Class</th>
+                    <th scope="col">Email</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
+                @foreach ($users as $user)
+                
                 <tr>
                     <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Mark</td>
-                    <td>Mark</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
+                    <td>{{$user->cin}}</td>
+                    <td>{{$user->cne}}</td>
+                    <td>{{$user->first_name}}</td>
+                    <td>{{$user->lastname}}</td>
+                    <td>{{$user->Class}}</td>
+                    <td>{{$user->email}}</td>
                     <td>
                         <button type="button" class="btn btn-success text-light">view</button>
                         <button type="button" class="btn btn-warning text-light">Update</button>
                         <button type="button" class="btn btn-danger text-light">Delete</button>
                     </td>
                 </tr>
-
+                   
+                @endforeach
             </tbody>
         </table>
     </div>
@@ -123,45 +128,51 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="POST" class="row g-3">
+                    <form action="{{route('etudiant.add')}}" method="POST" class="row g-3">
+                        @csrf
                         <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">CIN</label>
-                            <input type="text" class="form-control" id="inputEmail4">
+                            <input type="text"  name="cin" class="form-control" id="inputEmail4">
                         </div>
                         <div class="col-md-6">
-                            <label for="inputPassword4" class="form-label">CNE</label>
+                            <label for="inputPassword4" name="cne" class="form-label">CNE</label>
                             <input type="text" class="form-control" id="inputPassword4">
                         </div>
 
                         <div class="col-md-6">
-                            <label for="inputPassword4" class="form-label">First name</label>
+                            <label for="inputPassword4" name="first_name"class="form-label">First name</label>
                             <input type="text" class="form-control" id="inputPassword4">
                         </div>
                         <div class="col-md-6">
-                            <label for="inputAddress" class="form-label">Last name</label>
+                            <label for="inputAddress" name="lastname"class="form-label">Last name</label>
                             <input type="text" class="form-control" id="inputAddress">
                         </div>
 
                         <div class="col-md-4">
                             <label for="inputState" class="form-label">Class</label>
-                            <select id="inputState" class="form-select">
+                            <select id="inputState" name="Class" class="form-select">
                                 <option selected>Choose...</option>
+                                <option value="s1">S1</option>
+                                <option value="s2">S2</option>
+                                <option value="s3">S3</option>
+                                <option value="s4">S4</option>
+                                {{-- <option>...</option>
                                 <option>...</option>
                                 <option>...</option>
-                                <option>...</option>
-                                <option>...</option>
-                                <option>...</option>
-                                <option>...</option>
-                                <option>...</option>
-                                <option>...</option>
+                                <option>...</option> --}}
                             </select>
+                            <div class="col-md-6">
+                                <label for="inputAddress" name="email"class="form-label">Email</label>
+                                <input type="text" class="form-control" id="inputAddress">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </div>
+                
             </div>
         </div>
     </div>
