@@ -27,6 +27,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css"
         integrity="sha512-SgaqKKxJDQ/tAUAAXzvxZz33rmn7leYDYfBP+YoMRSENhf3zJyx3SBASt/OfeQwBHA1nxMis7mM3EV/oYT6Fdw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            $('#exampleModal').modal('show');
+        });
+    </script>
 </head>
 
 <body>
@@ -72,9 +81,125 @@
     </nav>
     {{-- !END NAVBAR --}}
 
+    {{-- !MODAL ADD COURSE --}}
+    <div class="modal modal-lg fade" id="exampleModal" data-bs-backdrop="static" tabindex="-1"
+        aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add course</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="#" method="POST">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="cin" class="form-label">Filiere</label>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected disabled>Choose</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="cin" class="form-label">Module</label>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected disabled>Choose</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="cne" class="form-label">Semestre</label>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected disabled>Choose</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-2 ">
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <label for="formFile" class="form-label">File name</label>
+                                    <input class="form-control" type="text" id="formFile">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <label for="formFile" class="form-label">Upload your file</label>
+                                    <input class="form-control" type="file" id="formFile"
+                                        accept="application/pdf">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-12">
+                                <button class="btn btn-success w-100" type="submit">submit</button>
+                            </div>
+                        </div>
+                    </form>
 
-    {{-- !TABLE --}}
+                </div>
+            </div>
+        </div>
+    </div>
 
+
+    {{-- !MODAL CALL END --}}
+
+
+
+
+    {{-- !TABLE 1 --}}
+
+    <div class="my-5 ms-5 me-5">
+        {{-- <button type="button" class="btn btn-outline-success mb-1" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">
+            <i class="fa-solid fa-plus"></i>
+        </button> --}}
+        <table class="table table-hover">
+            <thead class="table table-light">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Filiere</th>
+                    <th scope="col">Module</th>
+                    <th scope="col">Semestre</th>
+                    <th scope="col">Course name</th>
+
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($users as $user)
+                    <tr>
+                        <th scope="row">#</th>
+                        <td>{{ $user->cin }}</td>
+                        <td>{{ $user->cne }}</td>
+                        <td>{{ $user->first_name }}</td>
+                        <td>{{ $user->lastname }}</td>
+
+                        <td>
+                            <button type="button" class="btn btn-success text-light" data-bs-toggle="modal"
+                                data-bs-target="#showModal">view</button>
+                            <button type="button" class="btn btn-warning text-light">Update</button>
+                            <button type="button" class="btn btn-danger text-light">Delete</button>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
+    {{-- !END TABLE --}}
+
+
+    {{-- !TABLE 2 --}}
     <div class="my-5 ms-5 me-5">
         <button type="button" class="btn btn-outline-success mb-1" data-bs-toggle="modal"
             data-bs-target="#exampleModal">
@@ -104,7 +229,8 @@
                         <td>{{ $user->Class }}</td>
                         <td>{{ $user->email }}</td>
                         <td>
-                            <button type="button" class="btn btn-success text-light">view</button>
+                            <button type="button" class="btn btn-success text-light" data-bs-toggle="modal"
+                                data-bs-target="#showModal">view</button>
                             <button type="button" class="btn btn-warning text-light">Update</button>
                             <button type="button" class="btn btn-danger text-light">Delete</button>
                         </td>
@@ -113,11 +239,11 @@
             </tbody>
         </table>
     </div>
-
-    {{-- !END TABLE --}}
+    {{-- !END TABLE 2 --}}
 
     {{-- !MODAL --}}
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -194,6 +320,67 @@
         </div>
     </div>
     {{-- !END MODAL --}}
+
+    {{-- !MODAL SHOW --}}
+    <div class="modal modal-lg fade" id="showModal" data-bs-backdrop="static" tabindex="-1"
+        aria-labelledby="showModalLabel" aria-hidden="true" data-bs-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="showModalLabel">View course</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="row g-3">
+                        <div class="col-md-6">
+                            <label for="inputEmail4" class="form-label">Champ 1</label>
+                            <input type="email" class="form-control" id="inputEmail4" disabled>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputPassword4" class="form-label">Champ 2</label>
+                            <input type="password" class="form-control" id="inputPassword4" disabled>
+                        </div>
+                        <div class="col-12">
+                            <label for="inputAddress" class="form-label">CHamp 3</label>
+                            <input type="text" class="form-control" id="inputAddress" disabled>
+                        </div>
+                        <div class="col-12">
+                            <label for="inputAddress2" class="form-label">Champ 4</label>
+                            <input type="text" class="form-control" id="inputAddress2" disabled>
+                        </div>
+                        {{-- <div class="col-md-6">
+                            <label for="inputCity" class="form-label">City</label>
+                            <input type="text" class="form-control" id="inputCity">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="inputState" class="form-label">State</label>
+                            <select id="inputState" class="form-select">
+                                <option selected>Choose...</option>
+                                <option>...</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="inputZip" class="form-label">Zip</label>
+                            <input type="text" class="form-control" id="inputZip">
+                        </div> --}}
+                        {{-- <div class="col-12">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="gridCheck">
+                                <label class="form-check-label" for="gridCheck">
+                                    Check me out
+                                </label>
+                            </div>
+                        </div> --}}
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary w-100">Open PDF</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- !MODAL END MODAL SHOW --}}
+
     PROF
 </body>
 
