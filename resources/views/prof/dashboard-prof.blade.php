@@ -130,20 +130,32 @@
                         @csrf
                         <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">CIN</label>
-                            <input type="text" name="cin" class="form-control" id="inputEmail4">
+                            <input type="text" name="cin" class="form-control" id="cin">
+                            @error('cin')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-md-6">
-                            <label for="inputPassword4" name="cne" class="form-label">CNE</label>
-                            <input type="text" class="form-control" id="inputPassword4">
+                            <label for="inputPassword4" class="form-label">CNE</label>
+                            <input type="text" name="cne" class="form-control" id="cne">
+                            @error('cne')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="col-md-6">
-                            <label for="inputPassword4" name="first_name"class="form-label">First name</label>
-                            <input type="text" class="form-control" id="inputPassword4">
+                            <label for="inputPassword4" class="form-label">First name</label>
+                            <input type="text" name="first_name" class="form-control" id="first_name">
+                            @error('first_name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-md-6">
-                            <label for="inputAddress" name="lastname"class="form-label">Last name</label>
-                            <input type="text" class="form-control" id="inputAddress">
+                            <label for="inputAddress"class="form-label">Last name</label>
+                            <input type="text" name="lastname" class="form-control" id="lastname">
+                            @error('lastname')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-md-12">
                             <label for="inputAddress" name="lastname"class="form-label">Email</label>
@@ -158,6 +170,16 @@
                                 <option value="s3">S3</option>
                                 <option value="s4">S4</option>
                             </select>
+                            @error('Class')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                            <div class="col-md-6">
+                                <label for="inputAddress" class="form-label">Email</label>
+                                <input type="text" name="email" class="form-control" id="email">
+                                @error('email')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
