@@ -129,14 +129,14 @@
                     <form action="{{ route('etudiant.add') }}" method="POST" class="row g-3">
                         @csrf
                         <div class="col-md-6">
-                            <label for="inputEmail4" class="form-label">CIN</label>
+                            <label for="cin" class="form-label">CIN</label>
                             <input type="text" name="cin" class="form-control" id="cin">
                             @error('cin')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-6">
-                            <label for="inputPassword4" class="form-label">CNE</label>
+                            <label for="cne" class="form-label">CNE</label>
                             <input type="text" name="cne" class="form-control" id="cne">
                             @error('cne')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -144,27 +144,30 @@
                         </div>
 
                         <div class="col-md-6">
-                            <label for="inputPassword4" class="form-label">First name</label>
+                            <label for="first_name" class="form-label">First name</label>
                             <input type="text" name="first_name" class="form-control" id="first_name">
                             @error('first_name')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-6">
-                            <label for="inputAddress"class="form-label">Last name</label>
+                            <label for="lastname"class="form-label">Last name</label>
                             <input type="text" name="lastname" class="form-control" id="lastname">
                             @error('lastname')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-12">
-                            <label for="inputAddress" name="lastname"class="form-label">Email</label>
-                            <input type="email" class="form-control" id="inputAddress">
+                            <label for="email" name="lastname"class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control" id="email">
+                            @error('email')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-md-4">
-                            <label for="inputState" class="form-label">Class</label>
-                            <select id="inputState" name="Class" class="form-select">
-                                <option selected>Choose...</option>
+                            <label for="Class" class="form-label">Class</label>
+                            <select id="Class" name="Class" class="form-select">
+                                <option selected>Choose </option>
                                 <option value="s1">S1</option>
                                 <option value="s2">S2</option>
                                 <option value="s3">S3</option>
@@ -173,13 +176,13 @@
                             @error('Class')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6">
                                 <label for="inputAddress" class="form-label">Email</label>
                                 <input type="text" name="email" class="form-control" id="email">
                                 @error('email')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
