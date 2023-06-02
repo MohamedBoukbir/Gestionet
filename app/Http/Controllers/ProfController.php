@@ -14,7 +14,7 @@ class ProfController extends Controller
     }
 
     public function addetudiant(Request $request){
-        dd($request->email);
+        // dd($request->email);
         $request->validate([
             'email' => ['required', 'string', 'email', 'max:255','unique:users'],
             'first_name'=>['required'],
@@ -24,7 +24,7 @@ class ProfController extends Controller
             'cne'=>['required'],
         ]);
         $user=new User();
-        dd($request);
+        // dd($request);
         $user->email=$request->email;
         $user->first_name=$request->first_name;
         $user->lastname=$request->lastname;
