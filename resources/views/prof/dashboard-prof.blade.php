@@ -48,8 +48,23 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
+                <ul class="navbar-nav active" aria-current="true">
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-2">
+                            <div class="fw-bold"><a href="" style="text-decoration: none;">Cours</a></div>
+                            {{-- <a class="nav-link" href="#">Cours</a> --}}
+                        </div>
+                        <span class="badge bg-primary rounded-pill">0</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start ms-5">
+                        <div class="ms-2 me-2">
+                            <div class="fw-bold"><a href="" style="text-decoration: none;"> Etudiants</a></div>
+
+                            {{-- <div class="fw-bold">Etudiants</div> --}}
+                        </div>
+                        <span class="badge bg-primary rounded-pill">0</span>
+                    </li>
+                    {{-- <li class="nav-item">
                         <a class="nav-link" href="#">Liste des etudiants</a>
                     </li>
                     <li class="nav-item">
@@ -57,7 +72,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Profile</a>
-                    </li>
+                    </li> --}}
 
                 </ul>
             </div>
@@ -89,10 +104,10 @@
     {{-- !TABLE 1 --}}
 
     <div class="my-5 ms-5 me-5">
-        {{-- <button type="button" class="btn btn-outline-success mb-1" data-bs-toggle="modal"
+        <button type="button" class="btn btn-outline-success mb-1" data-bs-toggle="modal"
             data-bs-target="#exampleModal">
             <i class="fa-solid fa-plus"></i>
-        </button> --}}
+        </button>
         <table class="table table-hover">
             <thead class="table table-light">
                 <tr>
@@ -138,8 +153,8 @@
                                         <div class="row mt-1">
                                             <div class="col-md-4">
                                                 <label for="inputEmail4" class="form-label">Filiere</label>
-                                                <input type="text" value="{{ $cour->filiere }}" class="form-control"
-                                                    id="inputEmail4" disabled>
+                                                <input type="text" value="{{ $cour->filiere }}"
+                                                    class="form-control" id="inputEmail4" disabled>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="inputPassword4" class="form-label">Module</label>
@@ -229,6 +244,20 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="module" class="form-label">Module</label>
+                                                <input class="form-select" type="search" list="dropdownList"
+                                                    placeholder="Search module" name="module" id="module">
+                                                <datalist id="dropdownList">
+                                                    <option value="">Choose</option>
+                                                    <option value="Java">Java</option>
+                                                    <option value="Python">Python</option>
+                                                    <option value="Laravel">Laravel</option>
+                                                    <option value="HTML">HTML</option>
+                                                    <option value="CSS">CSS</option>
+                                                    <option value="MySQl">MySQl</option>
+                                                    <option value="Langage C">Langage C</option>
+                                                </datalist>
+
+                                                {{-- 
                                                 <select class="form-select" name="module" id="module"
                                                     aria-label="Default select example">
                                                     <option value="">Choose</option>
@@ -239,7 +268,7 @@
                                                     <option value="CSS">CSS</option>
                                                     <option value="MySQl">MySQl</option>
                                                     <option value="Langage C">Langage C</option>
-                                                </select>
+                                                </select> --}}
                                                 @error('module')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
@@ -302,7 +331,7 @@
     {{-- !TABLE STUDENT --}}
     <div class="my-5 ms-5 me-5">
         <button type="button" class="btn btn-outline-success mb-1" data-bs-toggle="modal"
-            data-bs-target="#exampleModal">
+            data-bs-target="#addStudentModal">
             <i class="fa-solid fa-plus"></i>
         </button>
         <table class="table table-hover">
@@ -342,7 +371,8 @@
 
     {{-- ?---------------------------- MODALS COUSRSE ----------------------------? --}}
     {{-- !MODAL ADD STUDENT --}}
-    {{-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addStudentModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -401,13 +431,13 @@
                             @error('semestre')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
-                            <div class="col-md-12">
+                            {{-- <div class="col-md-12">
                                 <label for="filiere" class="form-label">Email</label>
                                 <input type="filiere" name="filiere" class="form-control" id="filiere">
                                 @error('filiere')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -417,7 +447,7 @@
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
     {{-- !END MODAL ADD STUDENT --}}
     {{-- ?---------------------------- END MODAL STUDENT ---------------------------? --}}
 
@@ -463,19 +493,6 @@
                                     <option value="MySQl">MySQl</option>
                                     <option value="Langage C">Langage C</option>
                                 </datalist>
-
-
-                                {{-- <select class="form-select" name="module" id="module"
-                                    aria-label="Default select example">
-                                    <option value="">Choose</option>
-                                    <option value="Java">Java</option>
-                                    <option value="Python">Python</option>
-                                    <option value="Laravel">Laravel</option>
-                                    <option value="HTML">HTML</option>
-                                    <option value="CSS">CSS</option>
-                                    <option value="MySQl">MySQl</option>
-                                    <option value="Langage C">Langage C</option>
-                                </select> --}}
                                 @error('module')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
