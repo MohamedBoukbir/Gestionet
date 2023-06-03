@@ -91,50 +91,71 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="#" method="POST">
+                    <form action="{{route('cours.add')}}" method="POST" enctype="multipart/form-data">
+                        @csrf
                         <div class="row">
                             <div class="col-md-4">
-                                <label for="cin" class="form-label">Filiere</label>
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected disabled>Choose</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                <label for="filiere" class="form-label">Filiere</label>
+                                <select class="form-select" name="filiere" aria-label="Default select example">
+                                    <option value="">Choose</option>
+                                    <option value="Genie informatique">Génie informatique</option>
+                                    <option value="Genie elecctrique">Génie électrique</option>
+                                    <option value="Genie mecanique">Génie mécanique</option>
+                                    <option value="Genie industrielle">Génie industrielle</option>
                                 </select>
+                                @error('filiere')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="col-md-4">
-                                <label for="cin" class="form-label">Module</label>
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected disabled>Choose</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                <label for="module" class="form-label">Module</label>
+                                <select class="form-select" name="module" id ="module" aria-label="Default select example">
+                                    <option value="">Choose</option>
+                                    <option value="Java">Java</option>
+                                    <option value="Python">Python</option>
+                                    <option value="Laravel">Laravel</option>
+                                    <option value="HTML">HTML</option>
+                                    <option value="CSS">CSS</option>
+                                    <option value="MySQl">MySQl</option>
+                                    <option value="Langage C">Langage C</option>
                                 </select>
+                                @error('module')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="col-md-4">
-                                <label for="cne" class="form-label">Semestre</label>
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected disabled>Choose</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                <label for="semestre" class="form-label">Semestre</label>
+                                <select class="form-select"  name="semestre" id ="semestre" aria-label="Default select example">
+                                    <option value="">Choose</option>
+                                    <option value="S1">S1</option>
+                                    <option value="S2">S2</option>
+                                    <option value="S3">S3</option>
+                                    <option value="S4">S4</option>
                                 </select>
+                                @error('semestre')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="row mt-2 ">
                             <div class="col-12">
                                 <div class="mb-3">
-                                    <label for="formFile" class="form-label">File name</label>
-                                    <input class="form-control" type="text" id="formFile">
+                                    <label for="cours_name" class="form-label">File name</label>
+                                    <input class="form-control" name="cours_name" type="text" id="cours_name">
+                                    @error('cours_name')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12">
                                 <div class="mb-3">
-                                    <label for="formFile" class="form-label">Upload your file</label>
-                                    <input class="form-control" type="file" id="formFile"
-                                        accept="application/pdf">
+                                    <label for="cours_body" class="form-label">Upload your file</label>
+                                    {{-- <input class="form-control" name="cours_body" type="file" id="formFile"
+                                        accept="application/pdf"> --}}
+                                        <input class="form-control" name="cours_body" type="file" id="cours_body"
+                                        >
                                 </div>
                             </div>
                         </div>
@@ -167,26 +188,28 @@
             <thead class="table table-light">
                 <tr>
                     <th scope="col">#</th>
+                    <th scope="col">Semestre</th>
                     <th scope="col">Filiere</th>
                     <th scope="col">Module</th>
-                    <th scope="col">Semestre</th>
                     <th scope="col">Course name</th>
-
+                    {{-- <th scope="col">Telecharger</th> --}}
                     <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($users as $user)
+                @foreach ($cours as $cour)
                     <tr>
                         <th scope="row">#</th>
-                        <td>{{ $user->cin }}</td>
-                        <td>{{ $user->cne }}</td>
-                        <td>{{ $user->first_name }}</td>
-                        <td>{{ $user->lastname }}</td>
-
+                        <td>{{ $cour->semestre }}</td>
+                        <td>{{ $cour->filiere }}</td>
+                        <td>{{ $cour->module }}</td>
+                        <td>{{ $cour->cours_name }}</td>
                         <td>
+                         
+                            {{-- <a href="{{ asset($cour->cours_body) }}">Télécharger le cours</a> --}}
                             <button type="button" class="btn btn-success text-light" data-bs-toggle="modal"
-                                data-bs-target="#showModal">view</button>
+                            {{-- data-target="#showModal{{ $annonce->id }}" --}}
+                                data-bs-target="#showModal{{$cour->id}}">view</button>
                             <button type="button" class="btn btn-warning text-light">Update</button>
                             <button type="button" class="btn btn-danger text-light">Delete</button>
                         </td>
@@ -229,8 +252,8 @@
                         <td>{{ $user->Class }}</td>
                         <td>{{ $user->email }}</td>
                         <td>
-                            <button type="button" class="btn btn-success text-light" data-bs-toggle="modal"
-                                data-bs-target="#showModal">view</button>
+                            {{-- <button type="button" class="btn btn-success text-light" data-bs-toggle="modal"
+                                data-bs-target="#showModal">view</button> --}}
                             <button type="button" class="btn btn-warning text-light">Update</button>
                             <button type="button" class="btn btn-danger text-light">Delete</button>
                         </td>
@@ -322,7 +345,7 @@
     {{-- !END MODAL --}}
 
     {{-- !MODAL SHOW --}}
-    <div class="modal modal-lg fade" id="showModal" data-bs-backdrop="static" tabindex="-1"
+    <div class="modal modal-lg fade"  id="showModal{{ $cour->id }}" data-bs-backdrop="static" tabindex="-1"
         aria-labelledby="showModalLabel" aria-hidden="true" data-bs-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -333,20 +356,20 @@
                 <div class="modal-body">
                     <form class="row g-3">
                         <div class="col-md-6">
-                            <label for="inputEmail4" class="form-label">Champ 1</label>
-                            <input type="email" class="form-control" id="inputEmail4" disabled>
+                            <label for="inputEmail4" class="form-label">Filiere</label>
+                            <input type="text" value="{{$cour->filiere}}" class="form-control" id="inputEmail4" disabled>
                         </div>
                         <div class="col-md-6">
-                            <label for="inputPassword4" class="form-label">Champ 2</label>
-                            <input type="password" class="form-control" id="inputPassword4" disabled>
+                            <label for="inputPassword4" class="form-label">Module</label>
+                            <input type="text" value="{{$cour->module}}" class="form-control" id="inputPassword4" disabled>
                         </div>
                         <div class="col-12">
-                            <label for="inputAddress" class="form-label">CHamp 3</label>
-                            <input type="text" class="form-control" id="inputAddress" disabled>
+                            <label for="inputAddress" class="form-label">Semestre</label>
+                            <input type="text" value="{{$cour->semestre}}" class="form-control" id="inputAddress" disabled>
                         </div>
                         <div class="col-12">
-                            <label for="inputAddress2" class="form-label">Champ 4</label>
-                            <input type="text" class="form-control" id="inputAddress2" disabled>
+                            <label for="cours_name" class="form-label">File name</label>
+                            <input type="text" value="{{$cour->cours_name}}" class="form-control" id="cours_name" disabled>
                         </div>
                         {{-- <div class="col-md-6">
                             <label for="inputCity" class="form-label">City</label>
@@ -372,7 +395,7 @@
                             </div>
                         </div> --}}
                         <div class="col-12">
-                            <button type="submit" class="btn btn-primary w-100">Open PDF</button>
+                            <a href="{{ asset($cour->cours_body) }}" class="btn btn-primary w-100">Open PDF</a>
                         </div>
                     </form>
                 </div>

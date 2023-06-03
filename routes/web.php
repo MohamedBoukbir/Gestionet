@@ -29,7 +29,7 @@ Route::get('/dashboard', [DashbordController::class,'logincontrole'])->middlewar
 //////////////// prof /////////////////////////
 Route::get('/prof/dashboard', [ProfController::class,'index'])->name('prof');
 Route::post('/add/etudiant', [ProfController::class,'addetudiant'])->name('etudiant.add');
-
+Route::post('/add/cours', [ProfController::class,'addcours'])->name('cours.add');
 
 //////////////// prof //////////////////////////
 //////////////// etudiant /////////////////////////
