@@ -20,7 +20,6 @@ use App\Http\Controllers\EtudiantController;
 Route::get('/', function () {
     return view('auth.login');
 });
-
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
@@ -28,9 +27,17 @@ Route::get('/', function () {
 Route::get('/dashboard', [DashbordController::class,'logincontrole'])->middleware(['auth', 'verified'])->name('dashboard');
 //////////////// prof /////////////////////////
 Route::get('/prof/dashboard', [ProfController::class,'index'])->name('prof');
+// add cours and Etudiant
 Route::post('/add/etudiant', [ProfController::class,'addetudiant'])->name('etudiant.add');
 Route::post('/add/cours', [ProfController::class,'addcours'])->name('cours.add');
+// update cours and Etudiant
+Route::post('update/etudiant/{etudiant}', [ProfController::class, 'updateetudiant'])->name('etudiant.update');
+Route::post('update/cours/{cours}', [ProfController::class, 'updatecours'])->name('cours.update');
+// delete cours and Etudiant
 Route::delete('delete/cours/{cours}', [ProfController::class,'destroyCours'])->name('cours.destroye');
+Route::delete('delete/etudiant/{etudiant}', [ProfController::class,'destroyEtudiant'])->name('etudiant.destroye');
+// nmbre des etudiant lire pdf
+Route::get('/nombre/etudiant/{userId}', [EtudiantController::class,'incrementlecture'])->name('increment-lecture');
 //////////////// prof //////////////////////////
 //////////////// etudiant /////////////////////////
 Route::get('/etudiant/dashboard', [EtudiantController::class,'index'])->name('etudiant');
