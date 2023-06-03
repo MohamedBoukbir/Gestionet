@@ -37,7 +37,7 @@ Route::post('update/cours/{cours}', [ProfController::class, 'updatecours'])->nam
 Route::delete('delete/cours/{cours}', [ProfController::class,'destroyCours'])->name('cours.destroye');
 Route::delete('delete/etudiant/{etudiant}', [ProfController::class,'destroyEtudiant'])->name('etudiant.destroye');
 // nmbre des etudiant lire pdf
-Route::get('/nombre/etudiant/{userId}', [EtudiantController::class,'incrementlecture'])->name('increment-lecture');
+Route::get('/nombre/etudiant/{cours}', [EtudiantController::class,'incrementlecture'])->name('increment-lecture');
 //////////////// prof //////////////////////////
 //////////////// etudiant /////////////////////////
 Route::get('/etudiant/dashboard', [EtudiantController::class,'index'])->name('etudiant');

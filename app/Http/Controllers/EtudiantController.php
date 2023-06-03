@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Cours;
+use App\Models\readCours;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,8 +18,18 @@ class EtudiantController extends Controller
         return view('etudiant.dashboard-etudiant',compact('cours'));
     }
     public function incrementlecture($cours){
-        // $user = User::find($userId);
-        dd('nadi');
-       
+        $cours = User::find($cours);
+
+        $read=new readCours();
+        $read->user_id=auth()->user()->id;
+        $read->cours_id=$cours->id;
+        $read->save();
+        // dd('nadi');
+        // $cours = Cours::where('');
+        // if ($user) {
+        //     $cours->nombrelire++;
+        //    
+        // }
+        return redirect(asset($cours->cours_body));
     }
 }
