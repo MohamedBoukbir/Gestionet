@@ -30,6 +30,7 @@ class EtudiantController extends Controller
         //     $cours->nombrelire++;
         //    
         // }
+        dd($cours->cours_body);
         return redirect(asset($cours->cours_body));
     }
 }

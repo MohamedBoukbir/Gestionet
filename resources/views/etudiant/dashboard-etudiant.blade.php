@@ -95,8 +95,8 @@
                 <td>{{ $cour->cours_name }}</td>
                 <td>
                     <div>
-                        <a href="{{ route('increment-lecture', ['cours' => $cour->id]) }}"></a>
-                        <a href="{{ asset($cour->cours_body) }}"> Télécharger le cours</a>
+                        <a href="{{ route('increment-lecture', ['cours' => $cour->id]) }}">Télécharger le cours</a>
+                        {{-- <a href="{{ asset($cour->cours_body) }}"> Télécharger le cours</a> --}}
                     </div>
                     
                 </td>
