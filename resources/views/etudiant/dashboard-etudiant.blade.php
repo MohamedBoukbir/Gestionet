@@ -94,8 +94,11 @@
                 <td>{{ $cour->module }}</td>
                 <td>{{ $cour->cours_name }}</td>
                 <td>
-                 
-                    <a href="{{ asset($cour->cours_body) }}">Télécharger le cours</a>
+                    <div>
+                        <a href="{{ route('increment-lecture', ['userId' => Auth::user()->id]) }}"></a>
+                        <a href="{{ asset($cour->cours_body) }}"> Télécharger le cours</a>
+                    </div>
+                    
                 </td>
             </tr>
         @endforeach
