@@ -207,7 +207,7 @@
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="{{ route('cours.add') }}" method="POST"
+                                    <form action="{{ route('cours.update', $cour->id) }}" method="POST"
                                         enctype="multipart/form-data">
                                         @csrf
                                         <div class="row">
@@ -262,7 +262,7 @@
                                                 <div class="mb-3">
                                                     <label for="cours_name" class="form-label">File name</label>
                                                     <input class="form-control" name="cours_name" type="text"
-                                                        id="cours_name">
+                                                        id="cours_name" value="{{ $cour->cours_name }} ">
                                                     @error('cours_name')
                                                         <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
@@ -285,7 +285,6 @@
                                             </div>
                                         </div>
                                     </form>
-
                                 </div>
                             </div>
                         </div>
@@ -450,9 +449,8 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="module" class="form-label">Module</label>
-
                                 <input class="form-select" type="search" list="dropdownList"
-                                    placeholder="Search module">
+                                    placeholder="Search module" name="module" id="module">
                                 <datalist id="dropdownList">
                                     <option value="">Choose</option>
                                     <option value="Java">Java</option>
