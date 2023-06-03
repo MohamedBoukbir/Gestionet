@@ -30,7 +30,7 @@ Route::get('/dashboard', [DashbordController::class,'logincontrole'])->middlewar
 Route::get('/prof/dashboard', [ProfController::class,'index'])->name('prof');
 Route::post('/add/etudiant', [ProfController::class,'addetudiant'])->name('etudiant.add');
 Route::post('/add/cours', [ProfController::class,'addcours'])->name('cours.add');
-
+Route::delete('delete/cours/{cours}', [ProfController::class,'destroyCours'])->name('cours.destroye');
 //////////////// prof //////////////////////////
 //////////////// etudiant /////////////////////////
 Route::get('/etudiant/dashboard', [EtudiantController::class,'index'])->name('etudiant');

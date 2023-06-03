@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 class ProfController extends Controller
 {
     public function index(){
-        $users=User::orderby('id','desc')->get();
+        $users=User::whereRoleIs('etudiant')->orderby('id','desc')->get();
         $cours =Cours::orderby('created_at','desc')->get();
         
         return view('prof.dashboard-prof',compact('cours','users'));
@@ -22,11 +22,13 @@ class ProfController extends Controller
             'email' => ['required', 'string', 'email', 'max:255','unique:users'],
             'first_name'=>['required'],
             'lastname'=>['required'],
-            'Class'=>['required'],
+            'semestre'=>['required'],
             'cin'=>['required'],
             'cne'=>['required'],
+            'filiere'=>['required'],
         ]);
         $user=new User();
+        $user->filiere=$request->filiere;
         $user->email=$request->email;
         $user->first_name=$request->first_name;
         $user->lastname=$request->lastname;
@@ -34,6 +36,7 @@ class ProfController extends Controller
         $user->cin=$request->cin;
         $user->cne=$request->cne;
         $user->password= Hash::make('test12345');
+        $user->attachRole('etudiant');
         $user->save();
         return back();
     }
@@ -57,5 +60,12 @@ class ProfController extends Controller
         $cours->cours_name=$request->cours_name;
         $cours->save();
         return back();
+    }
+
+    public function destroyCours(Cours $cours)
+    {
+        // dd($annonce);
+        $cours->delete();
+        return redirect()->back()->with('success', 'cours  a été bien supremer !!');
     }
 }

@@ -211,7 +211,12 @@
                             {{-- data-target="#showModal{{ $annonce->id }}" --}}
                                 data-bs-target="#showModal{{$cour->id}}">view</button>
                             <button type="button" class="btn btn-warning text-light">Update</button>
-                            <button type="button" class="btn btn-danger text-light">Delete</button>
+                            {{-- <button type="button" class="btn btn-danger text-light">Delete</button>
+                             --}}
+                             <a class="btn btn-danger text-light" href="#" data-toggle="modal"
+                                                                    data-target="#ModalDelete{{ $cour->id }}"
+                                                                    style="color: #9cb2bd;">
+                                                                    <i class="fa-solid fa-trash"></i> Delete</a>
                         </td>
                     </tr>
                 @endforeach
@@ -249,7 +254,7 @@
                         <td>{{ $user->cne }}</td>
                         <td>{{ $user->first_name }}</td>
                         <td>{{ $user->lastname }}</td>
-                        <td>{{ $user->Class }}</td>
+                        <td>{{ $user->semestre }}</td>
                         <td>{{ $user->email }}</td>
                         <td>
                             {{-- <button type="button" class="btn btn-success text-light" data-bs-toggle="modal"
@@ -307,31 +312,31 @@
                             @enderror
                         </div>
                         <div class="col-md-12">
-                            <label for="email" name="lastname"class="form-label">Email</label>
+                            <label for="email" class="form-label">Email</label>
                             <input type="email" name="email" class="form-control" id="email">
                             @error('email')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-md-4">
-                            <label for="Class" class="form-label">Class</label>
-                            <select id="Class" name="Class" class="form-select">
+                            <label for="semestre" class="form-label">Class</label>
+                            <select id="semestre" name="semestre" class="form-select">
                                 <option selected>Choose </option>
                                 <option value="s1">S1</option>
                                 <option value="s2">S2</option>
                                 <option value="s3">S3</option>
                                 <option value="s4">S4</option>
                             </select>
-                            @error('Class')
+                            @error('semestre')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
-                            {{-- <div class="col-md-6">
-                                <label for="inputAddress" class="form-label">Email</label>
-                                <input type="text" name="email" class="form-control" id="email">
-                                @error('email')
+                            <div class="col-md-12">
+                                <label for="filiere" class="form-label">Email</label>
+                                <input type="filiere" name="filiere" class="form-control" id="filiere">
+                                @error('filiere')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
-                            </div> --}}
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -404,7 +409,42 @@
     </div>
     {{-- !MODAL END MODAL SHOW --}}
 
-    PROF
+     {{-- MODAL DELETE --}}
+     <div class="modal fade" id="ModalDelete{{ $cour->id }}"
+        tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form
+                    action="{{ route('cours.destroye', $cour->id) }}"
+                    method="POST" enctype="multipart/form-data">
+                    {{ method_field('delete') }}
+                    {{ csrf_field() }}
+                    @method('DELETE')
+                    @csrf
+                    <div class="modal-header">
+                        <h4 class="modal-title">
+                            {{ __('Supprimer cours') }}</h4>
+                        <button type="button" class="close"
+                            data-dismiss="modal" aria-label="Close">
+                            <Span aria-hidden="true">&times;</Span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Voulez-vous supprimer le cours
+                        <b>{{ $cour->cours_name }}</b>?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"
+                            class="btn gray btn-outline-secondary"
+                            data-dismiss="modal">{{ __('Anuller') }}</button>
+                        <button type="submit"
+                            class="btn gray btn-outline-danger">{{ __('Supprimer') }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{-- END MODAL DELETE --}}
 </body>
 
 </html>

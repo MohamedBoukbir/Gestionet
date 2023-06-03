@@ -72,9 +72,36 @@
     </nav>
     {{-- !END NAVBAR --}}
 
-
-    ETD
-
+{{--!table --}}
+<table class="table table-hover">
+    <thead class="table table-light">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Semestre</th>
+            <th scope="col">Filiere</th>
+            <th scope="col">Module</th>
+            <th scope="col">Course name</th>
+            {{-- <th scope="col">Telecharger</th> --}}
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($cours as $cour)
+            <tr>
+                <th scope="row">#</th>
+                <td>{{ $cour->semestre }}</td>
+                <td>{{ $cour->filiere }}</td>
+                <td>{{ $cour->module }}</td>
+                <td>{{ $cour->cours_name }}</td>
+                <td>
+                 
+                    <a href="{{ asset($cour->cours_body) }}">Télécharger le cours</a>
+                </td>
+            </tr>
+        @endforeach
+    </tbody>
+</table>
+{{--! end table --}}
 
 </body>
 

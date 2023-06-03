@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('first_name')->nullable();
             $table->string('username')->nullable();
             $table->string('lastname')->nullable();
-            $table->string('Class')->nullable();
+            $table->string('semestre')->nullable();
+            $table->string('filiere')->nullable();
             $table->string('cin')->nullable();
             $table->string('cne')->nullable();
             $table->string('email')->unique();
