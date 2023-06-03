@@ -42,7 +42,8 @@
     {{-- !START NAVBAR --}}
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">GESTION DES ETUDIANTS</a>
+            <a class="navbar-brand text-primary fw-bold" href="#">Gestion Des
+                Etudiants</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -54,7 +55,7 @@
                             <div class="fw-bold"><a href="" style="text-decoration: none;">Cours</a></div>
                             {{-- <a class="nav-link" href="#">Cours</a> --}}
                         </div>
-                        <span class="badge bg-primary rounded-pill">0</span>
+                        <span class="badge bg-primary rounded-pill">{{ count($cours) }}</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-start ms-5">
                         <div class="ms-2 me-2">
@@ -83,13 +84,12 @@
                             @csrf
                             <x-dropdown-link :href="route('logout')"
                                 onclick="event.preventDefault();
-                                                this.closest('form').submit();">
+                                                this.closest('form').submit();"
+                                style="text-decoration: none;">
                                 <i class="fa-solid fa-right-from-bracket"></i> {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>
                     </li>
-
-
                 </ul>
             </div>
         </div>
