@@ -16,19 +16,21 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $prof=User::create(['username' => 'prof',
+        $prof=User::create([
                                 'email' =>'prof@gmail.com',
                                 'password' =>Hash::make('test12345'),
+                                'lastname' =>'',
+                                'first_name' =>'Admin',
                         
         ]); 
         $prof->attachRole('prof');
 
-        $etudiant=User::create(['username' => 'etudiant',
-        'email' =>'etudiant@gmail.com',
-        'password' =>Hash::make('test12345'),
+        // $etudiant=User::create([
+        // 'email' =>'etudiant@gmail.com',
+        // 'password' =>Hash::make('test12345'),
 
-        ]); 
-        $etudiant->attachRole('etudiant');
+        // ]); 
+        // $etudiant->attachRole('etudiant');
 
 
     

@@ -130,6 +130,7 @@
                         <td>{{ $cour->cours_name }}</td>
                         <td>{{ $cour->read_cours_count }}</td>
                         <td>
+                            <a href="{{ route('index.comment',['cours' => $cour->id]) }}">Comment</a>
                             <button type="button" class="btn btn-success text-light" data-bs-toggle="modal"
                                 data-bs-target="#showModal{{ $cour->id }}">view</button>
                             <button type="button" class="btn btn-warning text-light" data-bs-toggle="modal"
