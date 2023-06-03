@@ -15,4 +15,8 @@ class Cours extends Model
         'cours_name',
         'cours_body',
     ];
+    public function readCours()
+{
+    return $this->hasMany(ReadCours::class, 'cours_id');
+}
 }

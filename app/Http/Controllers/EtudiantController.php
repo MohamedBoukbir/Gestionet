@@ -18,19 +18,18 @@ class EtudiantController extends Controller
         return view('etudiant.dashboard-etudiant',compact('cours'));
     }
     public function incrementlecture($cours){
-        $cours = User::find($cours);
-
+        $user=auth()->user()->id;
+        $cours = Cours::find($cours);
+        $read=readCours::where('cours_id', $cours->id)
+                         ->where('user_id',$user)->first();
+        // dd( $read);
+        if($read){
+            return redirect(asset($cours->cours_body));
+        }
         $read=new readCours();
-        $read->user_id=auth()->user()->id;
+        $read->user_id=$user;
         $read->cours_id=$cours->id;
         $read->save();
-        // dd('nadi');
-        // $cours = Cours::where('');
-        // if ($user) {
-        //     $cours->nombrelire++;
-        //    
-        // }
-        dd($cours->cours_body);
         return redirect(asset($cours->cours_body));
     }
 }

@@ -5,13 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Cours;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class ProfController extends Controller
 {
     public function index(){
         $users=User::whereRoleIs('etudiant')->orderby('id','desc')->get();
-        $cours =Cours::orderby('created_at','desc')->get();
+        // $cours=DB::table('cours')
+        // ->join('readCours', 'cours.id', '=', 'readCours.cours_id')
+        // ->select('cours.*','count')
+        // ->get();
+        $cours = Cours::withCount('readCours')->get();
+        // $cours =
+        // Cours::orderby('created_at','desc')->get();
         
         return view('prof.dashboard-prof',compact('cours','users'));
     }
