@@ -36,6 +36,20 @@
             $('#exampleModal').modal('show');
         });
     </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
+    </script>
+
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
 </head>
 
 <body>
@@ -63,7 +77,7 @@
 
                             {{-- <div class="fw-bold">Etudiants</div> --}}
                         </div>
-                        <span class="badge bg-primary rounded-pill">0</span>
+                        <span class="badge bg-primary rounded-pill">{{ count($users) }}</span>
                     </li>
                     {{-- <li class="nav-item">
                         <a class="nav-link" href="#">Liste des etudiants</a>
@@ -100,7 +114,6 @@
 
 
 
-
     {{-- !TABLE 1 --}}
 
     <div class="my-5 ms-5 me-5">
@@ -108,7 +121,7 @@
             data-bs-target="#exampleModal">
             <i class="fa-solid fa-plus"></i>
         </button>
-        <table class="table table-hover">
+        <table id="example" class="table table-hover table-bordered text-center table-responsive">
             <thead class="table table-light">
                 <tr>
                     <th scope="col">#</th>
@@ -130,12 +143,29 @@
                         <td>{{ $cour->cours_name }}</td>
                         <td>{{ $cour->read_cours_count }}</td>
                         <td>
-                            <button type="button" class="btn btn-success text-light" data-bs-toggle="modal"
-                                data-bs-target="#showModal{{ $cour->id }}">view</button>
+                            {{-- <button type="button" class="btn btn-primary text-light" data-bs-toggle="modal"
+                                data-bs-target="#showModal{{ $cour->id }}"><i
+                                    class="fa-solid fa-download"></i></button> --}}
+                            <a href="{{ asset($cour->cours_body) }}" class="btn btn-primary" target="_blank"><i
+                                    class="fa-solid fa-download"></i></a>
                             <button type="button" class="btn btn-warning text-light" data-bs-toggle="modal"
-                                data-bs-target="#updateModal{{ $cour->id }}">Update</button>
+                                data-bs-target="#updateModal{{ $cour->id }}"><i
+                                    class="fa-solid fa-pen"></i></button>
                             <button type="button" class="btn btn-danger text-light" data-bs-toggle="modal"
-                                data-bs-target="#deleteModal{{ $cour->id }}">Delete</button>
+                                data-bs-target="#deleteModal{{ $cour->id }}"><i
+                                    class="fa-solid fa-trash"></i></button>
+                            <button type="button" class="btn btn-success text-light"><i
+                                    class="fa-solid fa-comment"></i></button>
+
+                            {{-- <button class="btn btn-primary dropdown-toggle dropdown-toggle-split" type="button"
+                                id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                more
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><button class="dropdown-item" type="button">Option 1</button></li>
+                                <li><button class="dropdown-item" type="button">Option 2</button></li>
+                                <li><button class="dropdown-item" type="button">Option 3</button></li>
+                            </ul> --}}
                         </td>
                     </tr>
                     {{--  --}}
@@ -256,19 +286,6 @@
                                                     <option value="MySQl">MySQl</option>
                                                     <option value="Langage C">Langage C</option>
                                                 </datalist>
-
-                                                {{-- 
-                                                <select class="form-select" name="module" id="module"
-                                                    aria-label="Default select example">
-                                                    <option value="">Choose</option>
-                                                    <option value="Java">Java</option>
-                                                    <option value="Python">Python</option>
-                                                    <option value="Laravel">Laravel</option>
-                                                    <option value="HTML">HTML</option>
-                                                    <option value="CSS">CSS</option>
-                                                    <option value="MySQl">MySQl</option>
-                                                    <option value="Langage C">Langage C</option>
-                                                </select> --}}
                                                 @error('module')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
@@ -322,6 +339,16 @@
                     </div>
                 @endforeach
             </tbody>
+            {{-- <tfoot>
+                <tr>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Office</th>
+                    <th>Age</th>
+                    <th>Start date</th>
+                    <th>Salary</th>
+                </tr>
+            </tfoot> --}}
         </table>
     </div>
 
@@ -399,8 +426,7 @@
                         </div>
                         <div class="col-md-4">
                             <label for="filiere" class="form-label">Filiere</label>
-                            <select class="form-select" name="filiere"
-                                aria-label="Default select example">
+                            <select class="form-select" name="filiere" aria-label="Default select example">
                                 <option value="">Choose</option>
                                 <option value="Genie informatique">Génie informatique</option>
                                 <option value="Genie elecctrique">Génie électrique</option>
@@ -688,6 +714,7 @@
             </div>
         </div>
     </div> --}}
+
     {{-- *END MODAL UPDATE --}}
     {{-- !MODAL DELETE COURSE --}}
     {{-- <div class="modal fade" id="deleteModal{{ $cour->id }}" tabindex="-1" role="dialog" aria-hidden="true">
@@ -721,6 +748,8 @@
     </div> --}}
     {{-- !END MODAL DELETE --}}
     {{-- !---------------------------- END MODALS COUSRSE ----------------------------! --}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>
