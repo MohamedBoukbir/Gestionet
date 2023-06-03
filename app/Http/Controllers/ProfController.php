@@ -42,7 +42,8 @@ class ProfController extends Controller
         $user->semestre=$request->semestre;
         $user->cin=$request->cin;
         $user->cne=$request->cne;
-        $user->password= Hash::make('test12345');
+        $user->password= Hash::make($request->cne);
+        // $user->password= $request->cne;
         $user->save();
         $user->attachRole('etudiant');
         return back();
