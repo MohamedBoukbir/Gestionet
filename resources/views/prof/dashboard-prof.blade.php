@@ -117,9 +117,179 @@
                                 data-bs-target="#showModal{{ $cour->id }}">view</button>
                             <button type="button" class="btn btn-warning text-light" data-bs-toggle="modal"
                                 data-bs-target="#updateModal{{ $cour->id }}">Update</button>
-                            <button type="button" class="btn btn-danger text-light">Delete</button>
+                            <button type="button" class="btn btn-danger text-light" data-bs-toggle="modal"
+                                data-bs-target="#deleteModal{{ $cour->id }}">Delete</button>
                         </td>
                     </tr>
+                    {{--  --}}
+                    <div class="modal modal-lg fade" id="showModal{{ $cour->id }}" data-bs-backdrop="static"
+                        tabindex="-1" aria-labelledby="showModalLabel" aria-hidden="true" data-bs-keyboard="false">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="showModalLabel">View course</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="row g-3">
+                                        <div class="row mt-1">
+                                            <div class="col-md-4">
+                                                <label for="inputEmail4" class="form-label">Filiere</label>
+                                                <input type="text" value="{{ $cour->filiere }}" class="form-control"
+                                                    id="inputEmail4" disabled>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="inputPassword4" class="form-label">Module</label>
+                                                <input type="text" value="{{ $cour->module }}"
+                                                    class="form-control" id="inputPassword4" disabled>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="inputAddress" class="form-label">Semestre</label>
+                                                <input type="text" value="{{ $cour->semestre }}"
+                                                    class="form-control" id="inputAddress" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 mt-2">
+                                            <label for="cours_name" class="form-label">File name</label>
+                                            <input type="text" value="{{ $cour->cours_name }}"
+                                                class="form-control" id="cours_name" disabled>
+                                        </div>
+                                        <div class="col-12 mt-3">
+                                            <a href="{{ asset($cour->cours_body) }}" class="btn btn-primary w-100"
+                                                target="_blank">Open PDF</a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{--  --}}
+                    <div class="modal fade" id="deleteModal{{ $cour->id }}" data-bs-backdrop="static"
+                        tabindex="-1" aria-labelledby="showModalLabel" aria-hidden="true" data-bs-keyboard="false">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <form action="{{ route('cours.destroye', $cour->id) }}" method="POST"
+                                    enctype="multipart/form-data">
+                                    {{ method_field('delete') }}
+                                    {{ csrf_field() }}
+                                    @method('DELETE')
+                                    @csrf
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">
+                                            {{ __('Supprimer cours') }}</h4>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Voulez-vous supprimer le cours
+                                        <b>{{ $cour->cours_name }}</b>?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn gray btn-outline-secondary"
+                                            data-bs-dismiss="modal">{{ __('Anuller') }}</button>
+                                        <button type="submit"
+                                            class="btn gray btn-outline-danger">{{ __('Supprimer') }}</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {{--  --}}
+                    <div class="modal modal-lg fade" id="updateModal{{ $cour->id }}" data-bs-backdrop="static"
+                        tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+                        data-bs-keyboard="false">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Update course</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{ route('cours.add') }}" method="POST"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="filiere" class="form-label">Filiere</label>
+                                                <select class="form-select" name="filiere"
+                                                    aria-label="Default select example">
+                                                    <option value="">Choose</option>
+                                                    <option value="Genie informatique">Génie informatique</option>
+                                                    <option value="Genie elecctrique">Génie électrique</option>
+                                                    <option value="Genie mecanique">Génie mécanique</option>
+                                                    <option value="Genie industrielle">Génie industrielle</option>
+                                                </select>
+                                                @error('filiere')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="module" class="form-label">Module</label>
+                                                <select class="form-select" name="module" id="module"
+                                                    aria-label="Default select example">
+                                                    <option value="">Choose</option>
+                                                    <option value="Java">Java</option>
+                                                    <option value="Python">Python</option>
+                                                    <option value="Laravel">Laravel</option>
+                                                    <option value="HTML">HTML</option>
+                                                    <option value="CSS">CSS</option>
+                                                    <option value="MySQl">MySQl</option>
+                                                    <option value="Langage C">Langage C</option>
+                                                </select>
+                                                @error('module')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="semestre" class="form-label">Semestre</label>
+                                                <select class="form-select" name="semestre" id="semestre"
+                                                    aria-label="Default select example">
+                                                    <option value="">Choose</option>
+                                                    <option value="S1">S1</option>
+                                                    <option value="S2">S2</option>
+                                                    <option value="S3">S3</option>
+                                                    <option value="S4">S4</option>
+                                                </select>
+                                                @error('semestre')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="row mt-2 ">
+                                            <div class="col-12">
+                                                <div class="mb-3">
+                                                    <label for="cours_name" class="form-label">File name</label>
+                                                    <input class="form-control" name="cours_name" type="text"
+                                                        id="cours_name">
+                                                    @error('cours_name')
+                                                        <div class="alert alert-danger">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="mb-3">
+                                                    <label for="cours_body" class="form-label">Upload your
+                                                        file</label>
+                                                    <input class="form-control" name="cours_body" type="file"
+                                                        id="cours_body" accept=".pdf, .doc, .docx, .xls, .xlsx">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-2">
+                                            <div class="col-12">
+                                                <button class="btn btn-success w-100" type="submit">submit</button>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 @endforeach
             </tbody>
         </table>
@@ -158,8 +328,7 @@
                         <td>{{ $user->semestre }}</td>
                         <td>{{ $user->email }}</td>
                         <td>
-                            {{-- <button type="button" class="btn btn-success text-light" data-bs-toggle="modal"
-                                data-bs-target="#showModal">view</button> --}}
+                            <button type="button" class="btn btn-success text-light">view</button>
                             <button type="button" class="btn btn-warning text-light">Update</button>
                             <button type="button" class="btn btn-danger text-light">Delete</button>
                         </td>
@@ -168,10 +337,11 @@
             </tbody>
         </table>
     </div>
-    {{-- !END TABLE 2 --}}
+    {{-- !END TABLE STUDENT --}}
 
+    {{-- ?---------------------------- MODALS COUSRSE ----------------------------? --}}
     {{-- !MODAL ADD STUDENT --}}
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {{-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -246,11 +416,9 @@
                 </div>
             </div>
         </div>
-    </div>
-    {{-- !END MODAL STUDENT --}}
-
-
-
+    </div> --}}
+    {{-- !END MODAL ADD STUDENT --}}
+    {{-- ?---------------------------- END MODAL STUDENT ---------------------------? --}}
 
 
     {{-- !---------------------------- MODALS COUSRSE ----------------------------! --}}
@@ -282,7 +450,22 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="module" class="form-label">Module</label>
-                                <select class="form-select" name="module" id="module"
+
+                                <input class="form-select" type="search" list="dropdownList"
+                                    placeholder="Search module">
+                                <datalist id="dropdownList">
+                                    <option value="">Choose</option>
+                                    <option value="Java">Java</option>
+                                    <option value="Python">Python</option>
+                                    <option value="Laravel">Laravel</option>
+                                    <option value="HTML">HTML</option>
+                                    <option value="CSS">CSS</option>
+                                    <option value="MySQl">MySQl</option>
+                                    <option value="Langage C">Langage C</option>
+                                </datalist>
+
+
+                                {{-- <select class="form-select" name="module" id="module"
                                     aria-label="Default select example">
                                     <option value="">Choose</option>
                                     <option value="Java">Java</option>
@@ -292,7 +475,7 @@
                                     <option value="CSS">CSS</option>
                                     <option value="MySQl">MySQl</option>
                                     <option value="Langage C">Langage C</option>
-                                </select>
+                                </select> --}}
                                 @error('module')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -327,9 +510,8 @@
                             <div class="col-12">
                                 <div class="mb-3">
                                     <label for="cours_body" class="form-label">Upload your file</label>
-                                    {{-- <input class="form-control" name="cours_body" type="file" id="formFile"
-                                     accept="application/pdf"> --}}
-                                    <input class="form-control" name="cours_body" type="file" id="cours_body">
+                                    <input class="form-control" name="cours_body" type="file" id="cours_body"
+                                        accept=".pdf, .doc, .docx, .xls, .xlsx">
                                 </div>
                             </div>
                         </div>
@@ -346,7 +528,7 @@
     </div>
     {{-- !MODAL ADD COURSE END --}}
     {{-- ?MODAL SHOW COURSE --}}
-    <div class="modal modal-lg fade" id="showModal{{ $cour->id }}" data-bs-backdrop="static" tabindex="-1"
+    {{-- <div class="modal modal-lg fade" id="showModal{{ $cour->id }}" data-bs-backdrop="static" tabindex="-1"
         aria-labelledby="showModalLabel" aria-hidden="true" data-bs-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -384,10 +566,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     {{-- ?END MODAL SHOW --}}
     {{-- *MODAL UPDATE COURSE --}}
-    <div class="modal modal-lg fade" id="updateModal{{ $cour->id }}" data-bs-backdrop="static" tabindex="-1"
+    {{-- <div class="modal modal-lg fade" id="updateModal{{ $cour->id }}" data-bs-backdrop="static" tabindex="-1"
         aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -459,9 +641,8 @@
                             <div class="col-12">
                                 <div class="mb-3">
                                     <label for="cours_body" class="form-label">Upload your file</label>
-                                    {{-- <input class="form-control" name="cours_body" type="file" id="formFile"
-                                            accept="application/pdf"> --}}
-                                    <input class="form-control" name="cours_body" type="file" id="cours_body">
+                                    <input class="form-control" name="cours_body" type="file" id="cours_body"
+                                        accept=".pdf, .doc, .docx, .xls, .xlsx">
                                 </div>
                             </div>
                         </div>
@@ -475,10 +656,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     {{-- *END MODAL UPDATE --}}
     {{-- !MODAL DELETE COURSE --}}
-    <div class="modal fade" id="ModalDelete{{ $cour->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+    {{-- <div class="modal fade" id="deleteModal{{ $cour->id }}" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <form action="{{ route('cours.destroye', $cour->id) }}" method="POST"
@@ -506,10 +687,9 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> --}}
     {{-- !END MODAL DELETE --}}
     {{-- !---------------------------- END MODALS COUSRSE ----------------------------! --}}
-
 </body>
 
 </html>
