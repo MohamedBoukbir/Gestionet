@@ -39,12 +39,12 @@ class ProfController extends Controller
         $user->email=$request->email;
         $user->first_name=$request->first_name;
         $user->lastname=$request->lastname;
-        $user->Class=$request->Class;
+        $user->semestre=$request->semestre;
         $user->cin=$request->cin;
         $user->cne=$request->cne;
         $user->password= Hash::make('test12345');
-        $user->attachRole('etudiant');
         $user->save();
+        $user->attachRole('etudiant');
         return back();
     }
 

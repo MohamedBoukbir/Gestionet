@@ -397,6 +397,20 @@
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
+                        <div class="col-md-4">
+                            <label for="filiere" class="form-label">Filiere</label>
+                            <select class="form-select" name="filiere"
+                                aria-label="Default select example">
+                                <option value="">Choose</option>
+                                <option value="Genie informatique">Génie informatique</option>
+                                <option value="Genie elecctrique">Génie électrique</option>
+                                <option value="Genie mecanique">Génie mécanique</option>
+                                <option value="Genie industrielle">Génie industrielle</option>
+                            </select>
+                            @error('filiere')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
 
                         <div class="col-md-6">
                             <label for="first_name" class="form-label">First name</label>
@@ -420,7 +434,7 @@
                             @enderror
                         </div>
                         <div class="col-md-4">
-                            <label for="semestre" class="form-label">Class</label>
+                            <label for="semestre" class="form-label">Semestere</label>
                             <select id="semestre" name="semestre" class="form-select">
                                 <option selected>Choose </option>
                                 <option value="s1">S1</option>
