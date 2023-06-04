@@ -31,7 +31,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             $('#exampleModal').modal('show');
         });
@@ -41,7 +41,7 @@
         $(document).ready(function() {
             $('#example').DataTable();
         });
-    </script>
+    </script> --}}
 
 
 
@@ -66,30 +66,19 @@
                 <ul class="navbar-nav active" aria-current="true">
                     <li class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="ms-2 me-2">
-                            <div class="fw-bold"><a href="" style="text-decoration: none;">Cours</a></div>
-                            {{-- <a class="nav-link" href="#">Cours</a> --}}
+                            <div class="fw-bold"><a href="{{ route('prof') }}" style="text-decoration: none;">Cours</a>
+                            </div>
                         </div>
-                        <span class="badge bg-primary rounded-pill">{{ count($cours) }}</span>
+                        <span class="badge bg-primary rounded-pill">0</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-start ms-5">
                         <div class="ms-2 me-2">
                             <div class="fw-bold"><a href="{{ route('student') }}" style="text-decoration: none;">
                                     Student</a></div>
 
-                            {{-- <div class="fw-bold">Etudiants</div> --}}
                         </div>
-                        <span class="badge bg-primary rounded-pill">{{ count($users) }}</span>
+                        <span class="badge bg-primary rounded-pill">0</span>
                     </li>
-                    {{-- <li class="nav-item">
-                        <a class="nav-link" href="#">Liste des etudiants</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Liste des documents</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Profile</a>
-                    </li> --}}
-
                 </ul>
             </div>
             <div class=" justify-content-end" id="navbarNav">
@@ -111,13 +100,9 @@
     </nav>
     {{-- !END NAVBAR --}}
 
-
-
-
-
     {{-- !TABLE 1 --}}
 
-    <div class="my-5 ms-5 me-5">
+    {{-- <div class="my-5 ms-5 me-5">
         <button type="button" class="btn btn-outline-success mb-1" data-bs-toggle="modal"
             data-bs-target="#exampleModal">
             <i class="fa-solid fa-plus"></i> Add course
@@ -155,19 +140,9 @@
                             <a class="btn btn-success" target="_blank"
                                 href="{{ route('index.comment', ['cours' => $cour->id]) }}"><i
                                     class="fa-solid fa-comment"></i></a>
-
-                            {{-- <button class="btn btn-primary dropdown-toggle dropdown-toggle-split" type="button"
-                                id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                more
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <li><button class="dropdown-item" type="button">Delete</button></li>
-                                <li><button class="dropdown-item" type="button">Option 2</button></li>
-                                <li><button class="dropdown-item" type="button">Option 3</button></li>
-                            </ul> --}}
                         </td>
                     </tr>
-                    {{--  --}}
+
                     <div class="modal modal-lg fade" id="showModal{{ $cour->id }}" data-bs-backdrop="static"
                         tabindex="-1" aria-labelledby="showModalLabel" aria-hidden="true" data-bs-keyboard="false">
                         <div class="modal-dialog">
@@ -210,7 +185,7 @@
                             </div>
                         </div>
                     </div>
-                    {{--  --}}
+
                     <div class="modal fade" id="deleteModal{{ $cour->id }}" data-bs-backdrop="static"
                         tabindex="-1" aria-labelledby="showModalLabel" aria-hidden="true" data-bs-keyboard="false">
                         <div class="modal-dialog" role="document">
@@ -241,7 +216,7 @@
                             </div>
                         </div>
                     </div>
-                    {{--  --}}
+
                     <div class="modal modal-lg fade" id="updateModal{{ $cour->id }}" data-bs-backdrop="static"
                         tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
                         data-bs-keyboard="false">
@@ -338,24 +313,14 @@
                     </div>
                 @endforeach
             </tbody>
-            {{-- <tfoot>
-                <tr>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Age</th>
-                    <th>Start date</th>
-                    <th>Salary</th>
-                </tr>
-            </tfoot> --}}
         </table>
-    </div>
+    </div> --}}
 
     {{-- !END TABLE --}}
 
 
     {{-- !TABLE STUDENT --}}
-    {{-- <div class="my-5 ms-5 me-5">
+    <div class="my-5 ms-5 me-5">
         <button type="button" class="btn btn-outline-success mb-1" data-bs-toggle="modal"
             data-bs-target="#addStudentModal">
             <i class="fa-solid fa-plus"></i>
@@ -392,13 +357,12 @@
                 @endforeach
             </tbody>
         </table>
-    </div> --}}
+    </div>
     {{-- !END TABLE STUDENT --}}
 
     {{-- ?---------------------------- MODALS COUSRSE ----------------------------? --}}
     {{-- !MODAL ADD STUDENT --}}
-    <div class="modal fade" id="addStudentModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="addStudentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -489,6 +453,7 @@
     </div>
     {{-- !END MODAL ADD STUDENT --}}
     {{-- ?---------------------------- END MODAL STUDENT ---------------------------? --}}
+
 
     {{-- !---------------------------- MODALS COUSRSE ----------------------------! --}}
     {{-- !MODAL ADD COURSE --}}

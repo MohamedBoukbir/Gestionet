@@ -12,15 +12,14 @@ class ProfController extends Controller
 {
     public function index(){
         $users=User::whereRoleIs('etudiant')->orderby('id','desc')->get();
-        // $cours=DB::table('cours')
-        // ->join('readCours', 'cours.id', '=', 'readCours.cours_id')
-        // ->select('cours.*','count')
-        // ->get();
         $cours = Cours::withCount('readCours')->get();
-        // $cours =
-        // Cours::orderby('created_at','desc')->get();
-        
         return view('prof.dashboard-prof',compact('cours','users'));
+    }
+
+    public function indexStudent(){
+        $users=User::whereRoleIs('etudiant')->orderby('id','desc')->get();
+        // $cours = Cours::withCount('readCours')->get();
+        return view('prof.dashboard-prof-student',compact('users'));
     }
 
     public function addetudiant(Request $request){
@@ -42,7 +41,8 @@ class ProfController extends Controller
         $user->semestre=$request->semestre;
         $user->cin=$request->cin;
         $user->cne=$request->cne;
-        $user->password= Hash::make('test12345');
+        $user->password= Hash::make($request->cne);
+        // $user->password= $request->cne;
         $user->save();
         $user->attachRole('etudiant');
         return back();

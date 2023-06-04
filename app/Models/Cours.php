@@ -19,4 +19,9 @@ class Cours extends Model
 {
     return $this->hasMany(ReadCours::class, 'cours_id');
 }
+
+public function comments()
+{
+    return $this->hasMany(Comment::class, 'cours_id');
+}
 }

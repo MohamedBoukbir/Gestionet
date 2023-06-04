@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashbordController;
 use App\Http\Controllers\EtudiantController;
@@ -27,6 +28,7 @@ Route::get('/', function () {
 Route::get('/dashboard', [DashbordController::class,'logincontrole'])->middleware(['auth', 'verified'])->name('dashboard');
 //////////////// prof /////////////////////////
 Route::get('/prof/dashboard', [ProfController::class,'index'])->name('prof');
+Route::get('/prof/dashboard-student', [ProfController::class,'indexStudent'])->name('student');
 // add cours and Etudiant
 Route::post('/add/etudiant', [ProfController::class,'addetudiant'])->name('etudiant.add');
 Route::post('/add/cours', [ProfController::class,'addcours'])->name('cours.add');
@@ -42,6 +44,11 @@ Route::get('/nombre/etudiant/{cours}', [EtudiantController::class,'incrementlect
 //////////////// etudiant /////////////////////////
 Route::get('/etudiant/dashboard', [EtudiantController::class,'index'])->name('etudiant');
 //////////////// etudiant //////////////////////////
+// Comment ///////////////////////////////
+Route::get('/index/comments/{cours}', [CommentController::class, 'indexComment'])->name('index.comment');
+Route::post('/comments', [CommentController::class, 'comments'])->name('comment');
+//end comment ///////////////////////////////
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
