@@ -331,14 +331,19 @@
                         <div class="w-100">
                             <h5 class="mb-1">{{ $comment->lastname . ' ' . $comment->first_name }}</h5>
                             <small class="ms-2">{{ $comment->comment_body }}</small>
+                            {{-- <span
+                                class="d-flex justify-content-end">{{ \Carbon\Carbon::parse($comment->created_at)->format('h:i a') }}</span> --}}
+
                             <span
-                                class="d-flex justify-content-end">{{ \Carbon\Carbon::parse($comment->created_at)->format('h:i a') }}</span>
+                                class="d-flex justify-content-end">{{ \Carbon\Carbon::parse($comment->created_at)->format('M-d-Y') }}
+                                at {{ \Carbon\Carbon::parse($comment->created_at)->format('H:i ') }}</span>
                         </div>
                     </div>
                 </div>
             @endforeach
             <div class="form-floating" style="display: flex; align-items: end;">
-                <textarea class="form-control mt-2" name="comment_body" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                <textarea class="form-control mt-2" name="comment_body" placeholder="Leave a comment here" id="floatingTextarea2"
+                    style="height: 100px"></textarea>
                 <button type="submit" class="btn btn-success ms-1" style="height: 100px"><i
                         class="fa-solid fa-paper-plane"></i></button>
                 <label for="floatingTextarea2">Add comment </label>
