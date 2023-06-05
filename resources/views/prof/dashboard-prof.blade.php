@@ -75,21 +75,9 @@
                         <div class="ms-2 me-2">
                             <div class="fw-bold"><a href="{{ route('students.index') }}" style="text-decoration: none;">
                                     Student</a></div>
-
-                            {{-- <div class="fw-bold">Etudiants</div> --}}
                         </div>
                         <span class="badge bg-primary rounded-pill">{{ count($users) }}</span>
                     </li>
-                    {{-- <li class="nav-item">
-                        <a class="nav-link" href="#">Liste des etudiants</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Liste des documents</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Profile</a>
-                    </li> --}}
-
                 </ul>
             </div>
             <div class=" justify-content-end" id="navbarNav">
@@ -111,12 +99,7 @@
     </nav>
     {{-- !END NAVBAR --}}
 
-
-
-
-
     {{-- !TABLE 1 --}}
-
     <div class="my-5 ms-5 me-5">
         <button type="button" class="btn btn-outline-success mb-1" data-bs-toggle="modal"
             data-bs-target="#exampleModal">
@@ -152,19 +135,9 @@
                             <button type="button" class="btn btn-danger text-light" data-bs-toggle="modal"
                                 data-bs-target="#deleteModal{{ $cour->id }}"><i
                                     class="fa-solid fa-trash"></i></button>
-                            <a class="btn btn-success" target="_blank"
+                            <a class="btn btn-success"
                                 href="{{ route('index.comment', ['cours_id' => $cour->id]) }}"><i
                                     class="fa-solid fa-comment"></i></a>
-
-                            {{-- <button class="btn btn-primary dropdown-toggle dropdown-toggle-split" type="button"
-                                id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                more
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <li><button class="dropdown-item" type="button">Delete</button></li>
-                                <li><button class="dropdown-item" type="button">Option 2</button></li>
-                                <li><button class="dropdown-item" type="button">Option 3</button></li>
-                            </ul> --}}
                         </td>
                     </tr>
                     {{--  --}}
@@ -338,19 +311,8 @@
                     </div>
                 @endforeach
             </tbody>
-            {{-- <tfoot>
-                <tr>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Age</th>
-                    <th>Start date</th>
-                    <th>Salary</th>
-                </tr>
-            </tfoot> --}}
         </table>
     </div>
-
     {{-- !END TABLE --}}
 
 
@@ -360,208 +322,33 @@
 
 
     @if (count($comments) > 0)
-        <form method="POST" action="{{ route('comment') }}">
+        <h4 class="text-success m-3 fw-bold">Comments</h4>
+        <form id="myForm" method="POST" action="{{ route('comment') }}" class="p-4">
             @csrf
-            <textarea type="text" name="comment_body" placeholder="comments here"> </textarea>
-            <button type="submit">Send</button>
-            <br>
             @foreach ($comments as $comment)
-                <div class="testimonial-item bg-light rounded p-4">
-                    <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-                    {{-- <p>{{$comment->comment_body}}</p> --}}
-
+                <div class="testimonial-item bg-light rounded p-3 mt-1">
                     <div class="d-flex align-items-center">
-                        {{-- @if ($comment->image)
-                <img class="img-fluid flex-shrink-0 rounded" src="/storage/images/{{ $comment->image }}"
-                    style="width: 50px; height: 50px;">
-                @else
-                <img class="img-fluid flex-shrink-0 rounded"   src="https://ui-avatars.com/api/?name={{ urlencode($comment->username) }}"
-                    style="width: 50px; height: 50px;">
-              
-                @endif --}}
-                        <div class="ps-3">
+                        <div class="w-100">
                             <h5 class="mb-1">{{ $comment->lastname . ' ' . $comment->first_name }}</h5>
-                            <small>{{ $comment->comment_body }}</small>
-                            <span>{{ \Carbon\Carbon::parse($comment->created_at)->format('h:i a') }}</span>
+                            <small class="ms-2">{{ $comment->comment_body }}</small>
+                            <span
+                                class="d-flex justify-content-end">{{ \Carbon\Carbon::parse($comment->created_at)->format('h:i a') }}</span>
                         </div>
                     </div>
                 </div>
             @endforeach
+            <div class="form-floating" style="display: flex; align-items: end;">
+                <textarea class="form-control mt-2" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                <button type="submit" class="btn btn-success ms-1" style="height: 100px"><i
+                        class="fa-solid fa-paper-plane"></i></button>
+                <label for="floatingTextarea2">Add comment </label>
+            </div>
         </form>
     @endif
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    {{-- <div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-                <div class="container-fluid section-items accordion-button" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    <div class="row w-100">
-                        <div class="col-md-2">
-                            <div class="translate-x">
-                                Semstre
-                            </div>
-                        </div>
-                        <div class="col-md-2 ">
-                            <div class="translate-x ">
-                                Filiere
-                            </div>
-                        </div>
-                        <div class="col-md-2 ">
-                            <div class="translate-x ">
-                                Module
-                            </div>
-                        </div>
-                        <div class="col-md-2 ">
-                            <div class="translate-x ">
-                                Course
-                            </div>
-                        </div>
-                        <div class="col-md-4 d-flex justify-content-end ">
-                            <div class="translate-x">
-                                create date
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </h2>
-            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    <form id="myForm" method="POST" action="{{ route('comment') }}">
-                        @csrf
-                        <div class="testimonial-item bg-light rounded p-3 mt-1">
-                            <div class="d-flex align-items-center">
-                                <div class="w-100">
-                                    <h5 class="mb-1">name</h5>
-                                    <small class="ms-2">comment</small>
-                                    <span class="d-flex justify-content-end">date</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="testimonial-item bg-light rounded p-3 mt-1">
-                            <div class="d-flex align-items-center">
-                                <div class="w-100">
-                                    <h5 class="mb-1">name</h5>
-                                    <small class="ms-2">comment</small>
-                                    <span class="d-flex justify-content-end">date</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-floating">
-                            <textarea class="form-control mt-2" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
-                            <label for="floatingTextarea2">Add comment </label>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
-    {{-- <div class="accordion accordion-flush" id="accordionFlushExample">
-
-        @foreach ($cours as $cour)
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <div class="container-fluid collapsed accordion-button" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#flush-collapseOne{{ $cour->id }}" aria-expanded="true"
-                        aria-controls="flush-collapseOne">
-                        <div class="row w-100">
-                            <div class="col-md-2">
-                                <div class="translate-x">
-                                    {{ $cour->semestre }}
-                                </div>
-                            </div>
-                            <div class="col-md-2 ">
-                                <div class="translate-x ">
-                                    {{ $cour->filiere }}
-                                </div>
-                            </div>
-                            <div class="col-md-2 ">
-                                <div class="translate-x ">
-                                    {{ $cour->module }}
-                                </div>
-                            </div>
-                            <div class="col-md-2 ">
-                                <div class="translate-x ">
-                                    {{ $cour->cour_name }}
-                                </div>
-                            </div>
-                            <div class="col-md-2 ">
-                                <div class="translate-x ">
-                                    {{ $cour->id }}
-                                </div>
-                            </div>
-                            <div class="col-md-4 d-flex justify-content-end ">
-                                <div class="translate-x">
-                                    {{ \Carbon\Carbon::parse($cour->created_at)->format('h:i a') }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </h2>
-                <div id="flush-collapseOne{{ $cour->id }}" class="accordion-collapse collapse"
-                    data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body">
-                        <div class="testimonial-item bg-light rounded p-3 mt-1">
-                            <div class="d-flex align-items-center">
-                                <div class="w-100">
-                                    <h5 class="mb-1">name</h5>
-                                    <small class="ms-2">comment</small>
-                                    <span class="d-flex justify-content-end">date</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="testimonial-item bg-light rounded p-3 mt-1">
-                            <div class="d-flex align-items-center">
-                                <div class="w-100">
-                                    <h5 class="mb-1">name</h5>
-                                    <small class="ms-2">comment</small>
-                                    <span class="d-flex justify-content-end">date</span>
-                                </div>
-                            </div>
-                        </div>
-                        <form id="myForm" method="POST" action="{{ route('comment') }}">
-                            @csrf
-                            <div class="form-floating">
-                                <textarea class="form-control mt-2" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
-                                <label for="floatingTextarea2">Add comment </label>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        @endforeach
-
-
-
-    </div> --}}
-
     <script>
-        // Get the textarea element and the form
         const textarea = document.getElementById('floatingTextarea2');
         const form = document.getElementById('myForm');
-
-        // Add event listener for the Enter key press
         textarea.addEventListener('keydown', function(event) {
             if (event.key === 'Enter' && !event.shiftKey) {
                 event.preventDefault(); // Prevent line break
@@ -569,48 +356,6 @@
             }
         });
     </script>
-
-
-    {{-- !TABLE STUDENT --}}
-    {{-- <div class="my-5 ms-5 me-5">
-        <button type="button" class="btn btn-outline-success mb-1" data-bs-toggle="modal"
-            data-bs-target="#addStudentModal">
-            <i class="fa-solid fa-plus"></i>
-        </button>
-        <table class="table table-hover">
-            <thead class="table table-light">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">CIN</th>
-                    <th scope="col">CNE</th>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Class</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($users as $user)
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>{{ $user->cin }}</td>
-                        <td>{{ $user->cne }}</td>
-                        <td>{{ $user->first_name }}</td>
-                        <td>{{ $user->lastname }}</td>
-                        <td>{{ $user->semestre }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>
-                            <button type="button" class="btn btn-success text-light">view</button>
-                            <button type="button" class="btn btn-warning text-light">Update</button>
-                            <button type="button" class="btn btn-danger text-light">Delete</button>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div> --}}
-    {{-- !END TABLE STUDENT --}}
 
     {{-- ?---------------------------- MODALS COUSRSE ----------------------------? --}}
     {{-- !MODAL ADD STUDENT --}}
@@ -687,13 +432,6 @@
                             @error('semestre')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
-                            {{-- <div class="col-md-12">
-                                <label for="filiere" class="form-label">Email</label>
-                                <input type="filiere" name="filiere" class="form-control" id="filiere">
-                                @error('filiere')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div> --}}
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -706,7 +444,6 @@
     </div>
     {{-- !END MODAL ADD STUDENT --}}
     {{-- ?---------------------------- END MODAL STUDENT ---------------------------? --}}
-
     {{-- !---------------------------- MODALS COUSRSE ----------------------------! --}}
     {{-- !MODAL ADD COURSE --}}
     <div class="modal modal-lg fade" id="exampleModal" data-bs-backdrop="static" tabindex="-1"
@@ -726,9 +463,8 @@
                                 <select class="form-select" name="filiere" aria-label="Default select example">
                                     <option value="">Choose</option>
                                     <option value="Genie informatique">Génie informatique</option>
-                                    <option value="Genie elecctrique">Génie électrique</option>
-                                    <option value="Genie mecanique">Génie mécanique</option>
-                                    <option value="Genie industrielle">Génie industrielle</option>
+                                    <option value="Genie informatique">Génie civile</option>
+                                    <option value="Genie elecctrique">Génie biologique</option>
                                 </select>
                                 @error('filiere')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -740,13 +476,16 @@
                                     placeholder="Search module" name="module" id="module">
                                 <datalist id="dropdownList">
                                     <option value="">Choose</option>
-                                    <option value="Java">Java</option>
-                                    <option value="Python">Python</option>
-                                    <option value="Laravel">Laravel</option>
-                                    <option value="HTML">HTML</option>
-                                    <option value="CSS">CSS</option>
-                                    <option value="MySQl">MySQl</option>
+                                    {{-- INFO --}}
                                     <option value="Langage C">Langage C</option>
+                                    <option value="Circuit logique">Circuit logique</option>
+                                    <option value="Réseaux">Réseaux</option>
+                                    <option value="Système d'exploitation">Système d'exploitation</option>
+                                    <option value="Génie logiciel">Génie logiciel</option>
+                                    <option value="Programmation java">Programmation java</option>
+                                    <option value="Programmation web">Programmation web</option>
+                                    <option value="Economie">Economie</option>
+                                    {{-- CIVIL --}}
                                 </datalist>
                                 @error('module')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -798,170 +537,6 @@
             </div>
         </div>
     </div>
-    {{-- !MODAL ADD COURSE END --}}
-    {{-- ?MODAL SHOW COURSE --}}
-    {{-- <div class="modal modal-lg fade" id="showModal{{ $cour->id }}" data-bs-backdrop="static" tabindex="-1"
-        aria-labelledby="showModalLabel" aria-hidden="true" data-bs-keyboard="false">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="showModalLabel">View course</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form class="row g-3">
-                        <div class="col-md-6">
-                            <label for="inputEmail4" class="form-label">Filiere</label>
-                            <input type="text" value="{{ $cour->filiere }}" class="form-control"
-                                id="inputEmail4" disabled>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="inputPassword4" class="form-label">Module</label>
-                            <input type="text" value="{{ $cour->module }}" class="form-control"
-                                id="inputPassword4" disabled>
-                        </div>
-                        <div class="col-12">
-                            <label for="inputAddress" class="form-label">Semestre</label>
-                            <input type="text" value="{{ $cour->semestre }}" class="form-control"
-                                id="inputAddress" disabled>
-                        </div>
-                        <div class="col-12">
-                            <label for="cours_name" class="form-label">File name</label>
-                            <input type="text" value="{{ $cour->cours_name }}" class="form-control"
-                                id="cours_name" disabled>
-                        </div>
-                        <div class="col-12">
-                            <a href="{{ asset($cour->cours_body) }}" class="btn btn-primary w-100"
-                                target="_blank">Open PDF</a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-    {{-- ?END MODAL SHOW --}}
-    {{-- *MODAL UPDATE COURSE --}}
-    {{-- <div class="modal modal-lg fade" id="updateModal{{ $cour->id }}" data-bs-backdrop="static" tabindex="-1"
-        aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-keyboard="false">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Update course</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="{{ route('cours.add') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <div class="row">
-                            <div class="col-md-4">
-                                <label for="filiere" class="form-label">Filiere</label>
-                                <select class="form-select" name="filiere" aria-label="Default select example">
-                                    <option value="">Choose</option>
-                                    <option value="Genie informatique">Génie informatique</option>
-                                    <option value="Genie elecctrique">Génie électrique</option>
-                                    <option value="Genie mecanique">Génie mécanique</option>
-                                    <option value="Genie industrielle">Génie industrielle</option>
-                                </select>
-                                @error('filiere')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-4">
-                                <label for="module" class="form-label">Module</label>
-                                <select class="form-select" name="module" id="module"
-                                    aria-label="Default select example">
-                                    <option value="">Choose</option>
-                                    <option value="Java">Java</option>
-                                    <option value="Python">Python</option>
-                                    <option value="Laravel">Laravel</option>
-                                    <option value="HTML">HTML</option>
-                                    <option value="CSS">CSS</option>
-                                    <option value="MySQl">MySQl</option>
-                                    <option value="Langage C">Langage C</option>
-                                </select>
-                                @error('module')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-4">
-                                <label for="semestre" class="form-label">Semestre</label>
-                                <select class="form-select" name="semestre" id="semestre"
-                                    aria-label="Default select example">
-                                    <option value="">Choose</option>
-                                    <option value="S1">S1</option>
-                                    <option value="S2">S2</option>
-                                    <option value="S3">S3</option>
-                                    <option value="S4">S4</option>
-                                </select>
-                                @error('semestre')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="row mt-2 ">
-                            <div class="col-12">
-                                <div class="mb-3">
-                                    <label for="cours_name" class="form-label">File name</label>
-                                    <input class="form-control" name="cours_name" type="text" id="cours_name">
-                                    @error('cours_name')
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="mb-3">
-                                    <label for="cours_body" class="form-label">Upload your file</label>
-                                    <input class="form-control" name="cours_body" type="file" id="cours_body"
-                                        accept=".pdf, .doc, .docx, .xls, .xlsx">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-2">
-                            <div class="col-12">
-                                <button class="btn btn-success w-100" type="submit">submit</button>
-                            </div>
-                        </div>
-                    </form>
-
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
-    {{-- *END MODAL UPDATE --}}
-    {{-- !MODAL DELETE COURSE --}}
-    {{-- <div class="modal fade" id="deleteModal{{ $cour->id }}" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <form action="{{ route('cours.destroye', $cour->id) }}" method="POST"
-                    enctype="multipart/form-data">
-                    {{ method_field('delete') }}
-                    {{ csrf_field() }}
-                    @method('DELETE')
-                    @csrf
-                    <div class="modal-header">
-                        <h4 class="modal-title">
-                            {{ __('Supprimer cours') }}</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <Span aria-hidden="true">&times;</Span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        Voulez-vous supprimer le cours
-                        <b>{{ $cour->cours_name }}</b>?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn gray btn-outline-secondary"
-                            data-dismiss="modal">{{ __('Anuller') }}</button>
-                        <button type="submit" class="btn gray btn-outline-danger">{{ __('Supprimer') }}</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div> --}}
-    {{-- !END MODAL DELETE --}}
     {{-- !---------------------------- END MODALS COUSRSE ----------------------------! --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
