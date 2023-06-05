@@ -153,7 +153,7 @@
                                 data-bs-target="#deleteModal{{ $cour->id }}"><i
                                     class="fa-solid fa-trash"></i></button>
                             <a class="btn btn-success" target="_blank"
-                                href="{{ route('index.comment', ['cours' => $cour->id]) }}"><i
+                                href="{{ route('index.comment', ['cours_id' => $cour->id]) }}"><i
                                     class="fa-solid fa-comment"></i></a>
 
                             {{-- <button class="btn btn-primary dropdown-toggle dropdown-toggle-split" type="button"

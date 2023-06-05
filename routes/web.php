@@ -62,7 +62,7 @@ Route::middleware('auth','backNotAllowed')->group(function () {
     
  //////////////// comment //////////////////////////
  // Comment ///////////////////////////////
-Route::get('/index/comments/{cours}', [CommentController::class, 'indexComment'])->name('index.comment');
+Route::get('/index/comments/{cours_id}', [CommentController::class, 'indexComment'])->name('index.comment');
 Route::post('/comments', [CommentController::class, 'comments'])->name('comment');
 //end comment ///////////////////////////////
 // nmbre des etudiant lire pdf
