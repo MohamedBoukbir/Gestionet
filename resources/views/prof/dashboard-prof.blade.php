@@ -338,7 +338,7 @@
                 </div>
             @endforeach
             <div class="form-floating" style="display: flex; align-items: end;">
-                <textarea class="form-control mt-2" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                <textarea class="form-control mt-2" name="comment_body" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
                 <button type="submit" class="btn btn-success ms-1" style="height: 100px"><i
                         class="fa-solid fa-paper-plane"></i></button>
                 <label for="floatingTextarea2">Add comment </label>
