@@ -31,11 +31,11 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             $('#exampleModal').modal('show');
         });
-    </script>
+    </script> --}}
 
     <script>
         $(document).ready(function() {
@@ -321,8 +321,8 @@
 
 
 
+    <h4 class="text-success m-3 fw-bold">Comments</h4>
     @if (count($comments) > 0)
-        <h4 class="text-success m-3 fw-bold">Comments</h4>
         <form id="myForm" method="POST" action="{{ route('comment') }}" class="p-4">
             @csrf
             @foreach ($comments as $comment)
@@ -344,6 +344,12 @@
                 <label for="floatingTextarea2">Add comment </label>
             </div>
         </form>
+    @else
+        <div style="display: flex; justify-content: center;">
+            <p class="text text-secondary">no comments yet</p>
+        </div>
+
+
     @endif
 
     <script>
