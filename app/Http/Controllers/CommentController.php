@@ -14,7 +14,8 @@ class CommentController extends Controller
     $users=User::whereRoleIs('etudiant')->orderby('id','desc')->get();
     $cours = Cours::withCount('readCours')->get();
 
-    session()->put('cours', $cours_id);
+    session()->put('cours_id', $cours_id);
+
     $comments = DB::table('users')
               ->join('comments', 'users.id', '=', 'comments.user_id')
               ->join('cours', 'cours.id', '=', 'comments.cours_id')
@@ -26,7 +27,7 @@ class CommentController extends Controller
    }
    
    public function comments(Request $request){
-    
+    //  dd($request->comment_body);
     if($request->comment_body && session()->has('cours_id')){
       $cours = session()->get('cours_id');
       $comments= new Comment();
