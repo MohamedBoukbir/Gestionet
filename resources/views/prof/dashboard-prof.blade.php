@@ -353,6 +353,64 @@
 
     {{-- !END TABLE --}}
 
+
+
+
+
+
+
+    @if (count($comments) > 0)
+        <form method="POST" action="{{ route('comment') }}">
+            @csrf
+            <textarea type="text" name="comment_body" placeholder="comments here"> </textarea>
+            <button type="submit">Send</button>
+            <br>
+            @foreach ($comments as $comment)
+                <div class="testimonial-item bg-light rounded p-4">
+                    <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+                    {{-- <p>{{$comment->comment_body}}</p> --}}
+
+                    <div class="d-flex align-items-center">
+                        {{-- @if ($comment->image)
+                <img class="img-fluid flex-shrink-0 rounded" src="/storage/images/{{ $comment->image }}"
+                    style="width: 50px; height: 50px;">
+                @else
+                <img class="img-fluid flex-shrink-0 rounded"   src="https://ui-avatars.com/api/?name={{ urlencode($comment->username) }}"
+                    style="width: 50px; height: 50px;">
+              
+                @endif --}}
+                        <div class="ps-3">
+                            <h5 class="mb-1">{{ $comment->lastname . ' ' . $comment->first_name }}</h5>
+                            <small>{{ $comment->comment_body }}</small>
+                            <span>{{ \Carbon\Carbon::parse($comment->created_at)->format('h:i a') }}</span>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </form>
+    @endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     {{-- <div class="accordion" id="accordionExample">
         <div class="accordion-item">
             <h2 class="accordion-header">
@@ -419,7 +477,7 @@
         </div>
     </div> --}}
 
-    <div class="accordion accordion-flush" id="accordionFlushExample">
+    {{-- <div class="accordion accordion-flush" id="accordionFlushExample">
 
         @foreach ($cours as $cour)
             <div class="accordion-item">
@@ -464,7 +522,6 @@
                 <div id="flush-collapseOne{{ $cour->id }}" class="accordion-collapse collapse"
                     data-bs-parent="#accordionFlushExample">
                     <div class="accordion-body">
-                        {{-- @foreach ($comments as $comment) --}}
                         <div class="testimonial-item bg-light rounded p-3 mt-1">
                             <div class="d-flex align-items-center">
                                 <div class="w-100">
@@ -483,8 +540,6 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- @endforeach --}}
-
                         <form id="myForm" method="POST" action="{{ route('comment') }}">
                             @csrf
                             <div class="form-floating">
@@ -499,7 +554,7 @@
 
 
 
-    </div>
+    </div> --}}
 
     <script>
         // Get the textarea element and the form

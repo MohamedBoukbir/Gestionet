@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\User;
+use App\Models\Cours;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class CommentController extends Controller
 {
    public function indexComment($cours){
+    $users=User::whereRoleIs('etudiant')->orderby('id','desc')->get();
+    $cours = Cours::withCount('readCours')->get();
     session()->put('cours', $cours);
     $comments = DB::table('users')
               ->join('comments', 'users.id', '=', 'comments.user_id')
@@ -17,7 +21,7 @@ class CommentController extends Controller
               ->select('users.first_name','users.lastname', 'comments.*')
               ->orderBy('comments.created_at', 'desc')
               ->get();
-     return view('comment',compact('comments'));
+     return view('prof.dashboard-prof',compact('comments','users','cours'));
    }
    
    public function comments(Request $request){

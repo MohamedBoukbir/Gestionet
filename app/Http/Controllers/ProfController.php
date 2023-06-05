@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Cours;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -13,7 +14,16 @@ class ProfController extends Controller
     public function index(){
         $users=User::whereRoleIs('etudiant')->orderby('id','desc')->get();
         $cours = Cours::withCount('readCours')->get();
-        return view('prof.dashboard-prof',compact('cours','users'));
+
+        $comments = DB::table('users')
+        ->join('comments', 'users.id', '=', 'comments.user_id')
+        ->join('cours', 'cours.id', '=', 'comments.cours_id')
+        ->where('cours.id', -1)
+        ->select('users.first_name','users.lastname', 'comments.*')
+        ->orderBy('comments.created_at', 'desc')
+        ->get();
+
+        return view('prof.dashboard-prof',compact('cours','users','comments'));
     }
 
     public function indexStudent(){
