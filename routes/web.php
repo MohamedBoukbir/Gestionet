@@ -33,6 +33,9 @@ Route::get('/dashboard', [DashbordController::class,'logincontrole'])->middlewar
 // prof // / nf// ff//fv/vfv/vff///
 Route::middleware('auth','backNotAllowed','role:prof')->group(function () {
     Route::get('/prof/dashboard', [ProfController::class,'index'])->name('prof');
+
+    Route::get('/prof/student/index', [ProfController::class,'indexStudent'])->name('students.index');
+
     // add cours and Etudiant
     Route::post('/add/etudiant', [ProfController::class,'addetudiant'])->name('etudiant.add');
     Route::post('/add/cours', [ProfController::class,'addcours'])->name('cours.add');

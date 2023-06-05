@@ -19,6 +19,7 @@ class CommentController extends Controller
               ->get();
      return view('comment',compact('comments'));
    }
+   
    public function comments(Request $request){
     
     if($request->comment_body && session()->has('cours')){

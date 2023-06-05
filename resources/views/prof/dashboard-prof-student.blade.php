@@ -73,7 +73,7 @@
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-start ms-5">
                         <div class="ms-2 me-2">
-                            <div class="fw-bold"><a href="{{ route('student') }}" style="text-decoration: none;">
+                            <div class="fw-bold"><a href="{{ route('students.index') }}" style="text-decoration: none;">
                                     Student</a></div>
 
                         </div>

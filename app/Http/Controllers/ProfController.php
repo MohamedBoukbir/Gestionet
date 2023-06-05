@@ -22,6 +22,9 @@ class ProfController extends Controller
         return view('prof.dashboard-prof-student',compact('users'));
     }
 
+
+    
+    
     public function addetudiant(Request $request){
         // dd($request->email);
         $request->validate([

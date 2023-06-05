@@ -73,7 +73,7 @@
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-start ms-5">
                         <div class="ms-2 me-2">
-                            <div class="fw-bold"><a href="{{ route('student') }}" style="text-decoration: none;">
+                            <div class="fw-bold"><a href="{{ route('students.index') }}" style="text-decoration: none;">
                                     Student</a></div>
 
                             {{-- <div class="fw-bold">Etudiants</div> --}}
@@ -352,6 +352,168 @@
     </div>
 
     {{-- !END TABLE --}}
+
+    {{-- <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <div class="container-fluid section-items accordion-button" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <div class="row w-100">
+                        <div class="col-md-2">
+                            <div class="translate-x">
+                                Semstre
+                            </div>
+                        </div>
+                        <div class="col-md-2 ">
+                            <div class="translate-x ">
+                                Filiere
+                            </div>
+                        </div>
+                        <div class="col-md-2 ">
+                            <div class="translate-x ">
+                                Module
+                            </div>
+                        </div>
+                        <div class="col-md-2 ">
+                            <div class="translate-x ">
+                                Course
+                            </div>
+                        </div>
+                        <div class="col-md-4 d-flex justify-content-end ">
+                            <div class="translate-x">
+                                create date
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <form id="myForm" method="POST" action="{{ route('comment') }}">
+                        @csrf
+                        <div class="testimonial-item bg-light rounded p-3 mt-1">
+                            <div class="d-flex align-items-center">
+                                <div class="w-100">
+                                    <h5 class="mb-1">name</h5>
+                                    <small class="ms-2">comment</small>
+                                    <span class="d-flex justify-content-end">date</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-item bg-light rounded p-3 mt-1">
+                            <div class="d-flex align-items-center">
+                                <div class="w-100">
+                                    <h5 class="mb-1">name</h5>
+                                    <small class="ms-2">comment</small>
+                                    <span class="d-flex justify-content-end">date</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-floating">
+                            <textarea class="form-control mt-2" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                            <label for="floatingTextarea2">Add comment </label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div> --}}
+
+    <div class="accordion accordion-flush" id="accordionFlushExample">
+
+        @foreach ($cours as $cour)
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <div class="container-fluid collapsed accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseOne{{ $cour->id }}" aria-expanded="true"
+                        aria-controls="flush-collapseOne">
+                        <div class="row w-100">
+                            <div class="col-md-2">
+                                <div class="translate-x">
+                                    {{ $cour->semestre }}
+                                </div>
+                            </div>
+                            <div class="col-md-2 ">
+                                <div class="translate-x ">
+                                    {{ $cour->filiere }}
+                                </div>
+                            </div>
+                            <div class="col-md-2 ">
+                                <div class="translate-x ">
+                                    {{ $cour->module }}
+                                </div>
+                            </div>
+                            <div class="col-md-2 ">
+                                <div class="translate-x ">
+                                    {{ $cour->cour_name }}
+                                </div>
+                            </div>
+                            <div class="col-md-2 ">
+                                <div class="translate-x ">
+                                    {{ $cour->id }}
+                                </div>
+                            </div>
+                            <div class="col-md-4 d-flex justify-content-end ">
+                                <div class="translate-x">
+                                    {{ \Carbon\Carbon::parse($cour->created_at)->format('h:i a') }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </h2>
+                <div id="flush-collapseOne{{ $cour->id }}" class="accordion-collapse collapse"
+                    data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        {{-- @foreach ($comments as $comment) --}}
+                        <div class="testimonial-item bg-light rounded p-3 mt-1">
+                            <div class="d-flex align-items-center">
+                                <div class="w-100">
+                                    <h5 class="mb-1">name</h5>
+                                    <small class="ms-2">comment</small>
+                                    <span class="d-flex justify-content-end">date</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-item bg-light rounded p-3 mt-1">
+                            <div class="d-flex align-items-center">
+                                <div class="w-100">
+                                    <h5 class="mb-1">name</h5>
+                                    <small class="ms-2">comment</small>
+                                    <span class="d-flex justify-content-end">date</span>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- @endforeach --}}
+
+                        <form id="myForm" method="POST" action="{{ route('comment') }}">
+                            @csrf
+                            <div class="form-floating">
+                                <textarea class="form-control mt-2" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                                <label for="floatingTextarea2">Add comment </label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+
+
+
+    </div>
+
+    <script>
+        // Get the textarea element and the form
+        const textarea = document.getElementById('floatingTextarea2');
+        const form = document.getElementById('myForm');
+
+        // Add event listener for the Enter key press
+        textarea.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault(); // Prevent line break
+                form.submit(); // Submit the form
+            }
+        });
+    </script>
 
 
     {{-- !TABLE STUDENT --}}
