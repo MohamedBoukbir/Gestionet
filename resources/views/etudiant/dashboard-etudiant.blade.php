@@ -104,10 +104,10 @@
                         <td>
                             <a href="{{ route('increment-lecture', ['cours' => $cour->id]) }}" class="btn btn-primary"
                                 target="_blank"><i class="fa-solid fa-download"></i></a>
-                            {{-- 
+
                             <a class="btn btn-success" href="{{ route('index.comment', ['cours_id' => $cour->id]) }}"><i
-                                    class="fa-solid fa-comment"></i></a> --}}
-                            <a class="btn btn-success" href="#"><i class="fa-solid fa-comment"></i></a>
+                                    class="fa-solid fa-comment"></i></a>
+                            {{-- <a class="btn btn-success" href="#"><i class="fa-solid fa-comment"></i></a> --}}
                         </td>
                     </tr>
                 @endforeach
