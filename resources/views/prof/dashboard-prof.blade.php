@@ -321,7 +321,8 @@
 
 
 
-    <h4 class="text-success m-3 fw-bold">Comments</h4>
+    <h4 class="text-primary m-3 fw-bold "
+        style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">Comments</h4>
     @if (count($comments) > 0)
         <form id="myForm" method="POST" action="{{ route('comment') }}" class="p-4">
             @csrf
@@ -329,13 +330,12 @@
                 <div class="testimonial-item bg-light rounded p-3 mt-1">
                     <div class="d-flex align-items-center">
                         <div class="w-100">
-                            <h5 class="mb-1">{{ $comment->lastname . ' ' . $comment->first_name }}</h5>
-                            <small class="ms-2">{{ $comment->comment_body }}</small>
-                            {{-- <span
-                                class="d-flex justify-content-end">{{ \Carbon\Carbon::parse($comment->created_at)->format('h:i a') }}</span> --}}
-
-                            <span
-                                class="d-flex justify-content-end">{{ \Carbon\Carbon::parse($comment->created_at)->format('M-d-Y') }}
+                            <h5 class="mb-1 fw-bold " style="font-family: serif;">
+                                {{ $comment->lastname . ' ' . $comment->first_name }}</h5>
+                            <small class="ms-2 text-secondary"
+                                style="font-family: sans-serif;">{{ $comment->comment_body }}</small>
+                            <span class="d-flex justify-content-end text-secondary"
+                                style="font-family: serif;">{{ \Carbon\Carbon::parse($comment->created_at)->format('M-d-Y') }}
                                 at {{ \Carbon\Carbon::parse($comment->created_at)->format('H:i ') }}</span>
                         </div>
                     </div>
