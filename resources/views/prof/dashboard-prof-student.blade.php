@@ -68,7 +68,7 @@
                             <div class="fw-bold"><a href="{{ route('prof') }}" style="text-decoration: none;">Cours</a>
                             </div>
                         </div>
-                        <span class="badge bg-primary rounded-pill">0</span>
+                        <span class="badge bg-primary rounded-pill">{{ count($cours) }}</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-start ms-5">
                         <div class="ms-2 me-2">

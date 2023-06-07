@@ -315,12 +315,6 @@
     </div>
     {{-- !END TABLE --}}
 
-
-
-
-
-
-
     <h4 class="text-primary m-3 fw-bold "
         style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">Comments</h4>
     @if (count($comments) > 0)
@@ -375,7 +369,6 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Add student</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>

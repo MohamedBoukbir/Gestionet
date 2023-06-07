@@ -14,7 +14,6 @@ class ProfController extends Controller
     public function index(){
         $users=User::whereRoleIs('etudiant')->orderby('id','desc')->get();
         $cours = Cours::withCount('readCours')->get();
-
         $comments = DB::table('users')
         ->join('comments', 'users.id', '=', 'comments.user_id')
         ->join('cours', 'cours.id', '=', 'comments.cours_id')
@@ -28,12 +27,10 @@ class ProfController extends Controller
 
     public function indexStudent(){
         $users=User::whereRoleIs('etudiant')->orderby('id','desc')->get();
-        // $cours = Cours::withCount('readCours')->get();
-        return view('prof.dashboard-prof-student',compact('users'));
+        $cours = Cours::withCount('readCours')->get();
+        return view('prof.dashboard-prof-student',compact('users','cours'));
     }
 
-
-    
     
     public function addetudiant(Request $request){
         // dd($request->email);
@@ -55,7 +52,7 @@ class ProfController extends Controller
         $user->cin=$request->cin;
         $user->cne=$request->cne;
         $user->password= Hash::make($request->cne);
-        // $user->password= $request->cne;
+        // $user->password = $request->cne;
         $user->save();
         $user->attachRole('etudiant');
         return back();
@@ -125,13 +122,13 @@ class ProfController extends Controller
     public function destroyCours(Cours $cours)
     {
         $cours->delete();
-        return redirect()->back()->with('success', 'cours  a été bien supremer !!');
+        return redirect()->back()->with('success', 'cours a été bien supprimé !!');
     }
 
     public function destroyEtudiant(User $user)
     {
     
         $user->delete();
-        return redirect()->back()->with('success', 'etudiant  a été bien supremer !!');
+        return redirect()->back()->with('success', 'etudiant  a été bien supprimé !!');
     }
 }

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Cours;
+use App\Models\Comment;
 use App\Models\readCours;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,8 +16,15 @@ class EtudiantController extends Controller
         $user=auth()->user();
         $cours=Cours::where('filiere',$user->filiere)
                       ->where('semestre',$user->semestre)->get();
+                      $comments = DB::table('users')
+        ->join('comments', 'users.id', '=', 'comments.user_id')
+        ->join('cours', 'cours.id', '=', 'comments.cours_id')
+        ->where('cours.id', -1)
+        ->select('users.first_name','users.lastname', 'comments.*')
+        ->orderBy('comments.created_at', 'desc')
+        ->get();
                     //   dd( $cours);
-        return view('etudiant.dashboard-etudiant',compact('cours'));
+        return view('etudiant.dashboard-etudiant',compact('cours','comments'));
     }
     public function incrementlecture($cours){
         $user=auth()->user()->id;
