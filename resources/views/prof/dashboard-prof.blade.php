@@ -140,6 +140,7 @@
                                     class="fa-solid fa-comment"></i></a>
                         </td>
                     </tr>
+                    {{--! modals--}}
                     {{--  --}}
                     <div class="modal modal-lg fade" id="showModal{{ $cour->id }}" data-bs-backdrop="static"
                         tabindex="-1" aria-labelledby="showModalLabel" aria-hidden="true" data-bs-keyboard="false">
@@ -309,6 +310,7 @@
                             </div>
                         </div>
                     </div>
+                 {{--!end  modals--}}
                 @endforeach
             </tbody>
         </table>

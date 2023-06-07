@@ -58,10 +58,9 @@ class ProfController extends Controller
         return back();
     }
 
-    public function updateetudiant(Request $request,User $user){
+    public function updateetudiant(Request $request, $user){
         // dd($request->email);
         $request->validate([
-            'email' => ['required', 'string', 'email', 'max:255','unique:users'],
             'first_name'=>['required'],
             'lastname'=>['required'],
             'semestre'=>['required'],
@@ -69,13 +68,21 @@ class ProfController extends Controller
             'cne'=>['required'],
             'filiere'=>['required'],
         ]);
+        $user=User::find($user);
+        if($user->email != $request->email){
+            $request->validate([
+                'email' => ['required', 'string', 'email', 'max:255']
+            ]);
+            $user->email=$request->email;
+        }
+        // dd($user);
         $user->filiere=$request->filiere;
-        $user->email=$request->email;
         $user->first_name=$request->first_name;
         $user->lastname=$request->lastname;
-        $user->Class=$request->Class;
+        $user->semestre=$request->semestre;
         $user->cin=$request->cin;
         $user->cne=$request->cne;
+        $user->password= Hash::make($request->cne);
         $user->save();
         return back();
     }
@@ -125,9 +132,10 @@ class ProfController extends Controller
         return redirect()->back()->with('success', 'cours a été bien supprimé !!');
     }
 
-    public function destroyEtudiant(User $user)
+    public function destroyEtudiant($user)
     {
-    
+     
+     $user=User::find($user);
         $user->delete();
         return redirect()->back()->with('success', 'etudiant  a été bien supprimé !!');
     }

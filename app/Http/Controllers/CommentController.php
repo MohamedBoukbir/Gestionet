@@ -39,4 +39,23 @@ class CommentController extends Controller
     }
     return back();
    }
+  /**************************** comment etudient ****************************** */
+  public function indexCommentetudiant($cours_id){
+    // dd($cours_id);
+    $user=auth()->user();
+    $cours=Cours::where('filiere',$user->filiere)
+                  ->where('semestre',$user->semestre)->get();
+
+    session()->put('cours_id', $cours_id);
+
+    $comments = DB::table('users')
+              ->join('comments', 'users.id', '=', 'comments.user_id')
+              ->join('cours', 'cours.id', '=', 'comments.cours_id')
+              ->where('cours.id', $cours_id)
+              ->select('users.first_name','users.lastname', 'comments.*')
+              ->orderBy('comments.created_at', 'desc')
+              ->get();
+         return view('etudiant.dashboard-etudiant',compact('cours','comments'));
+   }
+
 }

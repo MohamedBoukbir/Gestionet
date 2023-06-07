@@ -129,15 +129,181 @@
                         <td>{{ $user->semestre }}</td>
                         <td>{{ $user->email }}</td>
                         <td>
-                            <a class="btn btn-success" href="#"><i class="fa-solid fa-eye"></i></a>
+                            {{-- <a class="btn btn-success" href="#"><i class="fa-solid fa-eye"></i></a> --}}
                             <button type="button" class="btn btn-warning text-light" data-bs-toggle="modal"
-                                data-bs-target="#"><i class="fa-solid fa-pen"></i></button>
-                            <button type="button" class="btn btn-danger text-light" data-bs-toggle="modal"
+                                data-bs-target="#updateModal{{ $user->id }}"><i
+                                    class="fa-solid fa-pen"></i></button>
+                                <button type="button" class="btn btn-danger text-light" data-bs-toggle="modal"
                                 data-bs-target="#deleteModal{{ $user->id }}"><i
                                     class="fa-solid fa-trash"></i></button>
                         </td>
                     </tr>
+                    {{--! models--}}
+                     {{--? show  --}}
+                     {{-- <div class="modal modal-lg fade" id="showModal{{ $cour->id }}" data-bs-backdrop="static"
+                        tabindex="-1" aria-labelledby="showModalLabel" aria-hidden="true" data-bs-keyboard="false">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="showModalLabel">View course</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="row g-3">
+                                        <div class="row mt-1">
+                                            <div class="col-md-4">
+                                                <label for="inputEmail4" class="form-label">Filiere</label>
+                                                <input type="text" value="{{ $cour->filiere }}"
+                                                    class="form-control" id="inputEmail4" disabled>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="inputPassword4" class="form-label">Module</label>
+                                                <input type="text" value="{{ $cour->module }}"
+                                                    class="form-control" id="inputPassword4" disabled>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="inputAddress" class="form-label">Semestre</label>
+                                                <input type="text" value="{{ $cour->semestre }}"
+                                                    class="form-control" id="inputAddress" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 mt-2">
+                                            <label for="cours_name" class="form-label">File name</label>
+                                            <input type="text" value="{{ $cour->cours_name }}"
+                                                class="form-control" id="cours_name" disabled>
+                                        </div>
+                                        <div class="col-12 mt-3">
+                                            <a href="{{ asset($cour->cours_body) }}" class="btn btn-primary w-100"
+                                                target="_blank">Open PDF</a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div> --}}
+                    {{--? end  show  --}}
+                    {{--? delete  --}}
                     <div class="modal fade" id="deleteModal{{ $user->id }}" data-bs-backdrop="static"
+                        tabindex="-1" aria-labelledby="showModalLabel" aria-hidden="true" data-bs-keyboard="false">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <form action="{{ route('etudiant.destroye', $user->id) }}" method="POST"
+                                    enctype="multipart/form-data">
+                                    {{ method_field('delete') }}
+                                    {{ csrf_field() }}
+                                    @method('DELETE')
+                                    @csrf
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">
+                                            {{ __('Supprimer cours') }}</h4>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Voulez-vous supprimer cette etudiant
+                                        <b>{{ $user->first_name ." ".$user->lastname }}</b>?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn gray btn-outline-secondary"
+                                            data-bs-dismiss="modal">{{ __('Anuller') }}</button>
+                                        <button type="submit"
+                                            class="btn gray btn-outline-danger">{{ __('Supprimer') }}</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {{--? end delete  --}}
+                    {{--? update  --}}
+                    <div class="modal modal-lg fade" id="updateModal{{ $user->id }}" data-bs-backdrop="static"
+                        tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+                        data-bs-keyboard="false">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Update course</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{ route('etudiant.update', $user->id) }}" method="POST"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="col-md-6">
+                                            <label for="cin" class="form-label">CIN</label>
+                                            <input type="text" name="cin" value="{{ $user->cin }} "  class="form-control" id="cin">
+                                            @error('cin')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="cne" class="form-label">CNE</label>
+                                            <input type="text" name="cne" value="{{ $user->cne }} "  class="form-control" id="cne">
+                                            @error('cne')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="first_name" class="form-label">First name</label>
+                                            <input type="text" name="first_name" value="{{ $user->first_name }} " class="form-control" id="first_name">
+                                            @error('first_name')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="lastname"class="form-label">Last name</label>
+                                            <input type="text" name="lastname" value="{{ $user->lastname }} " class="form-control" id="lastname">
+                                            @error('lastname')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="filiere" class="form-label">Filiere</label>
+                                            <select class="form-select" name="filiere" aria-label="Default select example">
+                                                <option value="">Choose</option>
+                                                <option value="Genie informatique">Génie informatique</option>
+                                                <option value="Genie elecctrique">Génie électrique</option>
+                                                <option value="Genie mecanique">Génie mécanique</option>
+                                                <option value="Genie industrielle">Génie industrielle</option>
+                                            </select>
+                                            @error('filiere')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="semestre" class="form-label">Semestere</label>
+                                            <select id="semestre" name="semestre" class="form-select">
+                                                <option selected>Choose </option>
+                                                <option value="s1">S1</option>
+                                                <option value="s2">S2</option>
+                                                <option value="s3">S3</option>
+                                                <option value="s4">S4</option>
+                                            </select>
+                                            @error('semestre')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label for="email" class="form-label">Email</label>
+                                            <input type="email" name="email" value="{{ $user->email }} " class="form-control" id="email">
+                                            @error('email')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                
+                                        <div class="modal-footer">
+                                            {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
+                                            <button type="submit" class="btn btn-primary">Save</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{--? end  update  --}}
+                     {{--! end  models--}}
+                    {{-- <div class="modal fade" id="deleteModal{{ $user->id }}" data-bs-backdrop="static"
                         tabindex="-1" aria-labelledby="showModalLabel" aria-hidden="true" data-bs-keyboard="false">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -166,7 +332,7 @@
                                 </form>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 @endforeach
             </tbody>
         </table>

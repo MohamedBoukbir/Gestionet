@@ -45,6 +45,8 @@ Route::middleware('auth','backNotAllowed','role:prof')->group(function () {
     // delete cours and Etudiant
     Route::delete('delete/cours/{cours}', [ProfController::class,'destroyCours'])->name('cours.destroye');
     Route::delete('delete/etudiant/{etudiant}', [ProfController::class,'destroyEtudiant'])->name('etudiant.destroye');
+     //////////////// comment //////////////////////////
+
 });
 // end prof // / nf// ff//fv/vfv/vff///
 // etudiant /// / / // / // / // / // / // / // / // / //
@@ -59,12 +61,16 @@ Route::get('/etudiant/dashboard', [EtudiantController::class,'index'])->name('et
 
 Route::middleware('auth','backNotAllowed')->group(function () {
     //////////////// authentification /////////////////////////
-    
- //////////////// comment //////////////////////////
- // Comment ///////////////////////////////
+     //////////////// comment //////////////////////////
+      // Comment ///////////////////////////////
 Route::get('/index/comments/{cours_id}', [CommentController::class, 'indexComment'])->name('index.comment');
 Route::post('/comments', [CommentController::class, 'comments'])->name('comment');
 //end comment ///////////////////////////////
+ // Comment ///////////////////////////////
+Route::get('/etudiant/comments/{cours_id}', [CommentController::class, 'indexCommentetudiant'])->name('etudiant.comment');
+// Route::post('//etudiant/comments', [CommentController::class, 'commentsetudiant'])->name('etudiant.comment');
+//end comment ///////////////////////////////
+
 // nmbre des etudiant lire pdf
 Route::get('/nombre/etudiant/{cours}', [EtudiantController::class,'incrementlecture'])->name('increment-lecture');
 //////////////// prof //////////////////////////
