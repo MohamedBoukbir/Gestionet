@@ -224,7 +224,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Update course</h1>
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Update student</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
@@ -232,65 +232,75 @@
                                     <form action="{{ route('etudiant.update', $user->id) }}" method="POST"
                                         enctype="multipart/form-data">
                                         @csrf
-                                        <div class="col-md-6">
-                                            <label for="cin" class="form-label">CIN</label>
-                                            <input type="text" name="cin" value="{{ $user->cin }} "
-                                                class="form-control" id="cin">
-                                            @error('cin')
-                                                <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="cin" class="form-label">CIN</label>
+                                                <input type="text" name="cin" value="{{ $user->cin }} "
+                                                    class="form-control" id="cin">
+                                                @error('cin')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="cne" class="form-label">CNE</label>
+                                                <input type="text" name="cne" value="{{ $user->cne }} "
+                                                    class="form-control" id="cne">
+                                                @error('cne')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <label for="cne" class="form-label">CNE</label>
-                                            <input type="text" name="cne" value="{{ $user->cne }} "
-                                                class="form-control" id="cne">
-                                            @error('cne')
-                                                <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="first_name" class="form-label">First name</label>
+                                                <input type="text" name="first_name"
+                                                    value="{{ $user->first_name }} " class="form-control"
+                                                    id="first_name">
+                                                @error('first_name')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="lastname"class="form-label">Last name</label>
+                                                <input type="text" name="lastname" value="{{ $user->lastname }} "
+                                                    class="form-control" id="lastname">
+                                                @error('lastname')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <label for="first_name" class="form-label">First name</label>
-                                            <input type="text" name="first_name" value="{{ $user->first_name }} "
-                                                class="form-control" id="first_name">
-                                            @error('first_name')
-                                                <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
+
+                                        <div class="row">
+
+                                            <div class="col-md-6">
+                                                <label for="filiere" class="form-label">Filiere</label>
+                                                <select class="form-select" name="filiere"
+                                                    aria-label="Default select example">
+                                                    <option value="">Choose</option>
+                                                    <option value="Genie informatique">Génie informatique</option>
+                                                    <option value="Genie elecctrique">Génie électrique</option>
+                                                    <option value="Genie mecanique">Génie mécanique</option>
+                                                    <option value="Genie industrielle">Génie industrielle</option>
+                                                </select>
+                                                @error('filiere')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="semestre" class="form-label">Semestere</label>
+                                                <select id="semestre" name="semestre" class="form-select">
+                                                    <option selected>Choose </option>
+                                                    <option value="s1">S1</option>
+                                                    <option value="s2">S2</option>
+                                                    <option value="s3">S3</option>
+                                                    <option value="s4">S4</option>
+                                                </select>
+                                                @error('semestre')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <label for="lastname"class="form-label">Last name</label>
-                                            <input type="text" name="lastname" value="{{ $user->lastname }} "
-                                                class="form-control" id="lastname">
-                                            @error('lastname')
-                                                <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="filiere" class="form-label">Filiere</label>
-                                            <select class="form-select" name="filiere"
-                                                aria-label="Default select example">
-                                                <option value="">Choose</option>
-                                                <option value="Genie informatique">Génie informatique</option>
-                                                <option value="Genie elecctrique">Génie électrique</option>
-                                                <option value="Genie mecanique">Génie mécanique</option>
-                                                <option value="Genie industrielle">Génie industrielle</option>
-                                            </select>
-                                            @error('filiere')
-                                                <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="semestre" class="form-label">Semestere</label>
-                                            <select id="semestre" name="semestre" class="form-select">
-                                                <option selected>Choose </option>
-                                                <option value="s1">S1</option>
-                                                <option value="s2">S2</option>
-                                                <option value="s3">S3</option>
-                                                <option value="s4">S4</option>
-                                            </select>
-                                            @error('semestre')
-                                                <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div>
+
                                         <div class="col-md-12">
                                             <label for="email" class="form-label">Email</label>
                                             <input type="email" name="email" value="{{ $user->email }} "
