@@ -21,8 +21,9 @@ class ProfController extends Controller
         ->select('users.first_name','users.lastname', 'comments.*')
         ->orderBy('comments.created_at', 'desc')
         ->get();
+        $cours_selected=Cours::find(0);
 
-        return view('prof.dashboard-prof',compact('cours','users','comments'));
+        return view('prof.dashboard-prof',compact('cours','users','comments','cours_selected'));
     }
 
     public function indexStudent(){

@@ -119,6 +119,7 @@
     <h4 class="text-primary m-3 fw-bold "
         style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">Comments</h4>
     @if (count($comments) > 0)
+        {{$cours_selected->id}}
         <form id="myForm" method="POST" action="{{ route('comment') }}" class="p-4">
             @csrf
             @foreach ($comments as $comment)
@@ -145,9 +146,12 @@
             </div>
         </form>
     @else
-        <div style="display: flex; justify-content: center;">
-            <p class="text text-secondary">no comments yet</p>
-        </div>
+    <div style="display: flex; justify-content: center;">
+        <p class="text text-secondary">no comments yet</p>
+    </div>
+        @if($cours_selected)
+        {{$cours_selected->id}}
+
         <form id="myForm" method="POST" action="{{ route('comment') }}" class="p-4">
             @csrf
             <div class="form-floating" style="display: flex; align-items: end;">
@@ -158,6 +162,10 @@
                 <label for="floatingTextarea2">Add comment </label>
             </div>
         </form>
+        @else
+        select cours
+        @endif
+   
     @endif
     <script>
         const textarea = document.getElementById('floatingTextarea2');

@@ -13,7 +13,7 @@ class CommentController extends Controller
    public function indexComment($cours_id){
     $users=User::whereRoleIs('etudiant')->orderby('id','desc')->get();
     $cours = Cours::withCount('readCours')->get();
-
+    $cours_selected=Cours::find($cours_id);
     session()->put('cours_id', $cours_id);
 
     $comments = DB::table('users')
@@ -23,7 +23,7 @@ class CommentController extends Controller
               ->select('users.first_name','users.lastname', 'comments.*')
               ->orderBy('comments.created_at', 'desc')
               ->get();
-     return view('prof.dashboard-prof',compact('comments','users','cours'));
+     return view('prof.dashboard-prof',compact('comments','users','cours','cours_selected'));
    }
    
    public function comments(Request $request){
@@ -45,6 +45,7 @@ class CommentController extends Controller
     $user=auth()->user();
     $cours=Cours::where('filiere',$user->filiere)
                   ->where('semestre',$user->semestre)->get();
+    $cours_selected=Cours::find($cours_id);
 
     session()->put('cours_id', $cours_id);
 
@@ -55,7 +56,7 @@ class CommentController extends Controller
               ->select('users.first_name','users.lastname', 'comments.*')
               ->orderBy('comments.created_at', 'desc')
               ->get();
-         return view('etudiant.dashboard-etudiant',compact('cours','comments'));
+         return view('etudiant.dashboard-etudiant',compact('cours','comments','cours_selected'));
    }
 
 }

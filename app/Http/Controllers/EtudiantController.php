@@ -23,8 +23,9 @@ class EtudiantController extends Controller
         ->select('users.first_name','users.lastname', 'comments.*')
         ->orderBy('comments.created_at', 'desc')
         ->get();
+        $cours_selected=Cours::find(0);
                     //   dd( $cours);
-        return view('etudiant.dashboard-etudiant',compact('cours','comments'));
+        return view('etudiant.dashboard-etudiant',compact('cours','comments','cours_selected'));
     }
     public function incrementlecture($cours){
         $user=auth()->user()->id;
