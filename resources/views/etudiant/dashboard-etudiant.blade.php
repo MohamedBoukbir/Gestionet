@@ -105,7 +105,8 @@
                             <a href="{{ route('increment-lecture', ['cours' => $cour->id]) }}" class="btn btn-primary"
                                 target="_blank"><i class="fa-solid fa-download"></i></a>
 
-                            <a class="btn btn-success" href="{{ route('etudiant.comment', ['cours_id' => $cour->id]) }}"><i
+                            <a class="btn btn-success"
+                                href="{{ route('etudiant.comment', ['cours_id' => $cour->id]) }}"><i
                                     class="fa-solid fa-comment"></i></a>
                             {{-- <a class="btn btn-success" href="#"><i class="fa-solid fa-comment"></i></a> --}}
                         </td>
@@ -147,6 +148,16 @@
         <div style="display: flex; justify-content: center;">
             <p class="text text-secondary">no comments yet</p>
         </div>
+        <form id="myForm" method="POST" action="{{ route('comment') }}" class="p-4">
+            @csrf
+            <div class="form-floating" style="display: flex; align-items: end;">
+                <textarea class="form-control mt-2" name="comment_body" placeholder="Leave a comment here" id="floatingTextarea2"
+                    style="height: 100px"></textarea>
+                <button type="submit" class="btn btn-success ms-1" style="height: 100px"><i
+                        class="fa-solid fa-paper-plane"></i></button>
+                <label for="floatingTextarea2">Add comment </label>
+            </div>
+        </form>
     @endif
     <script>
         const textarea = document.getElementById('floatingTextarea2');

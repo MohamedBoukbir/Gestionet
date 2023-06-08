@@ -140,7 +140,7 @@
                                     class="fa-solid fa-comment"></i></a>
                         </td>
                     </tr>
-                    {{--! modals--}}
+                    {{-- ! modals --}}
                     {{--  --}}
                     <div class="modal modal-lg fade" id="showModal{{ $cour->id }}" data-bs-backdrop="static"
                         tabindex="-1" aria-labelledby="showModalLabel" aria-hidden="true" data-bs-keyboard="false">
@@ -310,7 +310,7 @@
                             </div>
                         </div>
                     </div>
-                 {{--!end  modals--}}
+                    {{-- !end  modals --}}
                 @endforeach
             </tbody>
         </table>
@@ -349,8 +349,16 @@
         <div style="display: flex; justify-content: center;">
             <p class="text text-secondary">no comments yet</p>
         </div>
-
-
+        <form id="myForm" method="POST" action="{{ route('comment') }}" class="p-4">
+            @csrf
+            <div class="form-floating" style="display: flex; align-items: end;">
+                <textarea class="form-control mt-2" name="comment_body" placeholder="Leave a comment here" id="floatingTextarea2"
+                    style="height: 100px"></textarea>
+                <button type="submit" class="btn btn-success ms-1" style="height: 100px"><i
+                        class="fa-solid fa-paper-plane"></i></button>
+                <label for="floatingTextarea2">Add comment </label>
+            </div>
+        </form>
     @endif
 
     <script>
