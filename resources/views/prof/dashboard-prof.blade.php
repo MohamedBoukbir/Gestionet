@@ -317,11 +317,14 @@
     </div>
     {{-- !END TABLE --}}
 
-    <h4 class="text-primary m-3 fw-bold "
-        style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">Comments</h4>
+
     @if (count($comments) > 0)
-        {{$cours_selected->id}}
-       
+        <h4 class="text-primary m-3 fw-bold "
+            style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">Comments</h4>
+        <div class="d-flex justify-content-end text-secondary me-2">
+            {{ $cours_selected->semestre }}/{{ $cours_selected->filiere }}/{{ $cours_selected->module }}/{{ $cours_selected->cours_name }}
+        </div>
+
         <form id="myForm" method="POST" action="{{ route('comment') }}" class="p-4">
             @csrf
             @foreach ($comments as $comment)
@@ -348,12 +351,12 @@
             </div>
         </form>
     @else
-        <div style="display: flex; justify-content: center;">
-            <p class="text text-secondary">no comments yet</p>
-        </div>
-            @if($cours_selected)
-            {{$cours_selected->id}}
-
+        @if ($cours_selected)
+            <h4 class="text-primary m-3 fw-bold "
+                style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">Comments</h4>
+            <div class="d-flex justify-content-end text-secondary me-2">
+                {{ $cours_selected->semestre }}/{{ $cours_selected->filiere }}/{{ $cours_selected->module }}/{{ $cours_selected->cours_name }}
+            </div>
             <form id="myForm" method="POST" action="{{ route('comment') }}" class="p-4">
                 @csrf
                 <div class="form-floating" style="display: flex; align-items: end;">
@@ -364,11 +367,7 @@
                     <label for="floatingTextarea2">Add comment </label>
                 </div>
             </form>
-            @else
-            select cours
-            @endif
-       
-        
+        @endif
     @endif
 
     <script>
