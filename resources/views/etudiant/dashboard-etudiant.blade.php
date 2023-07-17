@@ -108,7 +108,6 @@
                             <a class="btn btn-success"
                                 href="{{ route('etudiant.comment', ['cours_id' => $cour->id]) }}"><i
                                     class="fa-solid fa-comment"></i></a>
-                            {{-- <a class="btn btn-success" href="#"><i class="fa-solid fa-comment"></i></a> --}}
                         </td>
                     </tr>
                 @endforeach
@@ -116,10 +115,12 @@
         </table>
     </div>
     {{-- ?COMMENTS --}}
-    <h4 class="text-primary m-3 fw-bold "
-        style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">Comments</h4>
     @if (count($comments) > 0)
-        {{$cours_selected->id}}
+        <h4 class="text-primary m-3 fw-bold "
+            style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">Comments</h4>
+        <div class="d-flex justify-content-end text-secondary me-2">
+            {{ $cours_selected->semestre }}/{{ $cours_selected->filiere }}/{{ $cours_selected->module }}/{{ $cours_selected->cours_name }}
+        </div>
         <form id="myForm" method="POST" action="{{ route('comment') }}" class="p-4">
             @csrf
             @foreach ($comments as $comment)
@@ -146,26 +147,25 @@
             </div>
         </form>
     @else
-    <div style="display: flex; justify-content: center;">
-        <p class="text text-secondary">no comments yet</p>
-    </div>
-        @if($cours_selected)
-        {{$cours_selected->id}}
-
-        <form id="myForm" method="POST" action="{{ route('comment') }}" class="p-4">
-            @csrf
-            <div class="form-floating" style="display: flex; align-items: end;">
-                <textarea class="form-control mt-2" name="comment_body" placeholder="Leave a comment here" id="floatingTextarea2"
-                    style="height: 100px"></textarea>
-                <button type="submit" class="btn btn-success ms-1" style="height: 100px"><i
-                        class="fa-solid fa-paper-plane"></i></button>
-                <label for="floatingTextarea2">Add comment </label>
+        @if ($cours_selected)
+            <h4 class="text-primary m-3 fw-bold "
+                style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">Comments</h4>
+            <div class="d-flex justify-content-end text-secondary me-2">
+                {{ $cours_selected->semestre }}/{{ $cours_selected->filiere }}/{{ $cours_selected->module }}/{{ $cours_selected->cours_name }}
             </div>
-        </form>
-        @else
-        select cours
+
+            <form id="myForm" method="POST" action="{{ route('comment') }}" class="p-4">
+                @csrf
+                <div class="form-floating" style="display: flex; align-items: end;">
+                    <textarea class="form-control mt-2" name="comment_body" placeholder="Leave a comment here" id="floatingTextarea2"
+                        style="height: 100px"></textarea>
+                    <button type="submit" class="btn btn-success ms-1" style="height: 100px"><i
+                            class="fa-solid fa-paper-plane"></i></button>
+                    <label for="floatingTextarea2">Add comment </label>
+                </div>
+            </form>
         @endif
-   
+
     @endif
     <script>
         const textarea = document.getElementById('floatingTextarea2');
