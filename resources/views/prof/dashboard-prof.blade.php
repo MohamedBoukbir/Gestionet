@@ -127,6 +127,7 @@
                         <td>{{ $cour->cours_name }}</td>
                         <td>{{ $cour->read_cours_count }}</td>
                         <td>
+                         {{-- {{   $cour->cours_body}} --}}
                             <a href="{{ asset($cour->cours_body) }}" class="btn btn-primary" target="_blank"><i
                                     class="fa-solid fa-download"></i></a>
                             <button type="button" class="btn btn-warning text-light" data-bs-toggle="modal"
